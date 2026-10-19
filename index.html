@@ -634,16 +634,16 @@
     </div>
 
     <!-- HIDDEN PRINT AREA FOR REPORT PDF GENERATION -->
-    <div id="pdfReportArea" style="display: none;" class="p-8 bg-black text-white font-sans max-w-2xl mx-auto border border-bodRed">
-      <div class="flex items-center justify-between border-b-2 border-bodRed pb-4 mb-4">
-        <img src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" alt="Logo" class="h-16 w-auto object-contain">
-        <div class="text-right">
-          <h2 id="pdfReportTitle" class="text-xl font-black text-bodRed uppercase">LAPORAN RIWAYAT TRANSAKSI</h2>
-          <p class="text-xs text-gray-400">BEWARE OF DOGS OFFICIAL DATABASE</p>
-        </div>
-      </div>
-      <div id="pdfReportContent" class="text-xs space-y-2"></div>
+<div id="pdfReportArea" style="position: absolute; left: -9999px; top: 0; width: 700px;" class="p-8 bg-black text-white font-sans mx-auto border border-bodRed">
+  <div class="flex items-center justify-between border-b-2 border-bodRed pb-4 mb-4">
+    <img src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" alt="Logo" class="h-16 w-auto object-contain">
+    <div class="text-right">
+      <h2 id="pdfReportTitle" class="text-xl font-black text-bodRed uppercase">LAPORAN RIWAYAT TRANSAKSI</h2>
+      <p class="text-xs text-gray-400">BEWARE OF DOGS OFFICIAL DATABASE</p>
     </div>
+  </div>
+  <div id="pdfReportContent" class="text-xs space-y-2"></div>
+</div>
 
     <!-- DIGITAL RECEIPT POPUP -->
     <div id="receiptModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
@@ -1221,9 +1221,6 @@ window.downloadPdfLaporan = function(type) {
       `;
 
       reportContent.innerHTML = rowsHtml;
-      
-      // Ubah style display menjadi block agar terbaca oleh html2pdf
-      reportArea.style.display = 'block';
 
       const opt = {
         margin:       0.3,
@@ -1233,10 +1230,7 @@ window.downloadPdfLaporan = function(type) {
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
       };
 
-      html2pdf().set(opt).from(reportArea).save().then(() => {
-        // Kembalikan ke display none setelah selesai di-download
-        reportArea.style.display = 'none';
-      });
+      html2pdf().set(opt).from(reportArea).save();
     }
 
     // TAB SWITCHER

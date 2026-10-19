@@ -1111,7 +1111,7 @@
         bajuOrders = remote;
         saveLocalData();
         renderBajuTable();
-        showToast("Data baju ter-sync dari GitHub!");
+        showToast("Data baju ter-sync dari BOD Database!");
       }
       if (spin) spin.classList.remove('fa-spin');
     }
@@ -1125,7 +1125,7 @@
         tiketOrders = remote;
         saveLocalData();
         renderTiketTable();
-        showToast("Data tiket ter-sync dari GitHub!");
+        showToast("Data tiket ter-sync dari BOD Database!");
       }
       if (spin) spin.classList.remove('fa-spin');
     }
@@ -1145,7 +1145,7 @@
 
       const badgeText = document.getElementById('saveBadgeText');
       if (isGithubSaved) {
-        badgeText.innerText = "Tersimpan ke GitHub Repository & LocalStorage";
+        badgeText.innerText = "Tersimpan ke BOD Database & LocalStorage";
       } else {
         badgeText.innerText = "Tersimpan di LocalStorage (Offline Backup)";
       }

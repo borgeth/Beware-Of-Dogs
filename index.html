@@ -70,7 +70,7 @@
   <header class="relative border-b border-bodBorder bg-black/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
       
-      <!-- LOGO AREA (Preserving original photo shape intact) -->
+      <!-- LOGO AREA -->
       <div class="flex items-center gap-4">
         <div class="relative group">
           <div class="absolute -inset-1 bg-gradient-to-r from-bodRed to-bodDarkRed rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-300"></div>
@@ -96,7 +96,7 @@
       <div class="flex items-center gap-2">
         <div class="px-3.5 py-2 bg-bodCard border border-bodBorder rounded-xl text-xs font-bold text-gray-200 flex items-center gap-2 shadow-md">
           <i class="fab fa-github text-base text-bodRed"></i>
-          <span>Auto-Sync Active (GitHub)</span>
+          <span>Auto-Sync Active</span>
         </div>
       </div>
 
@@ -110,7 +110,6 @@
     <div class="bg-gradient-to-b from-bodCard to-black border border-bodBorder rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden mb-8 gradient-glow">
       <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-bodRed/10 rounded-full blur-3xl pointer-events-none"></div>
       
-      <!-- LOGO CENTER DISPLAY (Original shape preserved) -->
       <div class="flex justify-center mb-4">
         <img 
           src="input_file_0.png" 
@@ -123,7 +122,7 @@
         OFFICIAL STORE & AUTOMATIC DATABASE
       </h2>
       <p class="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto font-medium">
-        Pemesanan Kaos & Tiket Acara dengan simpan otomatis langsung ke **GitHub Repository**, pembuatan Struk Digital WA, dan Ekspor Laporan PDF.
+        Pemesanan Kaos & Tiket Acara dengan simpan otomatis, pembuatan Struk Digital WA, dan Ekspor Laporan PDF.
       </p>
     </div>
 
@@ -174,7 +173,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-tshirt text-bodRed"></i> Form Pembelian Baju
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub Repository & Local</p>
+            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di Database</p>
           </div>
           <span class="text-xs font-black bg-bodRed/20 border border-bodRed/50 text-bodRed px-3 py-1.5 rounded-lg self-start sm:self-auto">
             Official Merchandise
@@ -293,7 +292,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-ticket-alt text-bodRed"></i> Form Pembelian Tiket
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub Repository & Local</p>
+            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di Database</p>
           </div>
           <span class="text-xs font-black bg-bodRed/20 border border-bodRed/50 text-bodRed px-3 py-1.5 rounded-lg self-start sm:self-auto">
             Live Event Ticket
@@ -385,6 +384,30 @@
     <!-- TAB 3: RIWAYAT PEMBELIAN BAJU -->
     <section id="tabHistoryBaju" class="hidden">
       <div class="bg-bodCard border border-bodBorder rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+        
+        <!-- PANEL HASIL TERJUAL BAJU -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-bodRed/20 border border-bodRed/50 flex items-center justify-center text-bodRed text-xl">
+              <i class="fas fa-tshirt"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Baju Terjual</p>
+              <h4 id="panelBajuPcs" class="text-2xl font-black text-white mt-0.5">0 Pcs</h4>
+            </div>
+          </div>
+
+          <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-green-500/20 border border-green-500/50 flex items-center justify-center text-green-400 text-xl">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pendapatan Baju</p>
+              <h4 id="panelBajuOmset" class="text-2xl font-black text-green-400 mt-0.5">Rp 0</h4>
+            </div>
+          </div>
+        </div>
+
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-bodBorder pb-4">
           <div>
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
@@ -398,7 +421,7 @@
               onclick="syncBajuData()" 
               class="px-3 py-2 bg-bodBorder hover:bg-gray-800 text-gray-200 text-xs font-bold rounded-xl transition-all flex items-center gap-2"
             >
-              <i class="fas fa-sync-alt" id="refreshBajuSpin"></i> Sync GitHub
+              <i class="fas fa-sync-alt" id="refreshBajuSpin"></i> Sync
             </button>
             <button 
               onclick="downloadPdfLaporan('baju')" 
@@ -436,6 +459,30 @@
     <!-- TAB 4: RIWAYAT PEMBELIAN TIKET -->
     <section id="tabHistoryTiket" class="hidden">
       <div class="bg-bodCard border border-bodBorder rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+        
+        <!-- PANEL HASIL TERJUAL TIKET -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-bodRed/20 border border-bodRed/50 flex items-center justify-center text-bodRed text-xl">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Tiket Terjual</p>
+              <h4 id="panelTiketPcs" class="text-2xl font-black text-white mt-0.5">0 Pcs</h4>
+            </div>
+          </div>
+
+          <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-green-500/20 border border-green-500/50 flex items-center justify-center text-green-400 text-xl">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pendapatan Tiket</p>
+              <h4 id="panelTiketOmset" class="text-2xl font-black text-green-400 mt-0.5">Rp 0</h4>
+            </div>
+          </div>
+        </div>
+
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-bodBorder pb-4">
           <div>
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
@@ -484,6 +531,65 @@
     </section>
 
   </main>
+
+  <!-- MODAL EDIT RIWAYAT TRANSAKSI -->
+  <div id="editModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="bg-black border-2 border-bodRed rounded-2xl max-w-md w-full overflow-hidden shadow-[0_0_50px_rgba(255,42,42,0.35)]">
+      <div class="bg-gradient-to-r from-bodRed to-bodDarkRed p-4 text-center relative">
+        <button onclick="closeEditModal()" class="absolute right-4 top-4 text-white/80 hover:text-white text-lg">
+          <i class="fas fa-times"></i>
+        </button>
+        <h3 class="text-lg font-black text-white tracking-widest uppercase">EDIT RIWAYAT TRANSAKSI</h3>
+        <p id="editOrderIdDisplay" class="text-[10px] text-white/80 font-mono mt-0.5">-</p>
+      </div>
+
+      <form id="editForm" onsubmit="saveEditOrder(event)" class="p-6 space-y-4 text-xs font-sans">
+        <input type="hidden" id="editItemType">
+        <input type="hidden" id="editOrderId">
+
+        <div>
+          <label class="block font-bold text-gray-300 mb-1 uppercase">Nama Pemesan</label>
+          <input type="text" id="editNama" required class="w-full bg-bodCard border border-bodBorder rounded-xl p-3 text-white outline-none focus:border-bodRed">
+        </div>
+
+        <div id="editSizeContainer">
+          <label class="block font-bold text-gray-300 mb-1 uppercase">Ukuran Baju</label>
+          <select id="editSize" class="w-full bg-bodCard border border-bodBorder rounded-xl p-3 text-white outline-none focus:border-bodRed">
+            <option value="S">S (Small)</option>
+            <option value="M">M (Medium)</option>
+            <option value="L">L (Large)</option>
+            <option value="XL">XL (Extra Large)</option>
+            <option value="XXL">XXL (Double XL)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-300 mb-1 uppercase">Jumlah (Pcs)</label>
+            <input type="number" id="editPcs" min="1" required class="w-full bg-bodCard border border-bodBorder rounded-xl p-3 text-white outline-none focus:border-bodRed">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-300 mb-1 uppercase">Harga Satuan (Rp)</label>
+            <input type="number" id="editHarga" required class="w-full bg-bodCard border border-bodBorder rounded-xl p-3 text-white outline-none focus:border-bodRed">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-300 mb-1 uppercase">WhatsApp</label>
+          <input type="tel" id="editWa" required class="w-full bg-bodCard border border-bodBorder rounded-xl p-3 text-white outline-none focus:border-bodRed">
+        </div>
+
+        <div class="pt-2 flex gap-2">
+          <button type="submit" id="btnEditSave" class="flex-1 bg-bodRed hover:bg-bodDarkRed text-white font-extrabold py-3 rounded-xl transition-all uppercase tracking-wider">
+            Simpan Perubahan
+          </button>
+          <button type="button" onclick="closeEditModal()" class="px-4 bg-bodBorder hover:bg-gray-800 text-gray-300 font-bold rounded-xl transition-all">
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- HIDDEN PRINT AREA FOR REPORT PDF GENERATION -->
   <div id="pdfReportArea" class="hidden p-8 bg-black text-white font-sans max-w-2xl mx-auto border border-bodRed">
@@ -550,7 +656,7 @@
 
           <div id="storageSaveBadge" class="bg-green-950/40 border border-green-800/60 rounded-xl p-2.5 text-center text-[11px] text-green-400 font-sans flex items-center justify-center gap-2">
             <i class="fas fa-check-circle"></i>
-            <span id="saveBadgeText">Tersimpan Otomatis ke GitHub & Local</span>
+            <span id="saveBadgeText">Tersimpan Otomatis ke Local</span>
           </div>
         </div>
       </div>
@@ -589,7 +695,7 @@
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-2">
         <img src="input_file_0.png" alt="Beware Of Dogs Mini" class="h-6 w-auto object-contain">
-        <span class="font-bold text-gray-300 uppercase">BEWARE OF DOGS</span>
+        <span class="font-bold text-gray-300 uppercase">BEWARE OF DOGS OORGANIZE</span>
       </div>
       <p>&copy; 2026 Beware Of Dogs Official. All rights reserved.</p>
     </div>
@@ -615,6 +721,7 @@
       loadLocalData();
       calculateBajuTotal();
       calculateTiketTotal();
+      updatePanels();
       // Auto-sync initial fetch from GitHub
       syncBajuData();
       syncTiketData();
@@ -630,18 +737,34 @@
 
       renderBajuTable();
       renderTiketTable();
+      updatePanels();
     }
 
     function saveLocalData() {
       localStorage.setItem('bod_baju_orders', JSON.stringify(bajuOrders));
       localStorage.setItem('bod_tiket_orders', JSON.stringify(tiketOrders));
+      updatePanels();
+    }
+
+    // UPDATE SUMMARY STATS PANELS
+    function updatePanels() {
+      const totalBajuPcs = bajuOrders.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
+      const totalBajuOmset = bajuOrders.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
+
+      const totalTiketPcs = tiketOrders.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
+      const totalTiketOmset = tiketOrders.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
+
+      document.getElementById('panelBajuPcs').innerText = `${numberWithCommas(totalBajuPcs)} Pcs`;
+      document.getElementById('panelBajuOmset').innerText = `Rp ${numberWithCommas(totalBajuOmset)}`;
+
+      document.getElementById('panelTiketPcs').innerText = `${numberWithCommas(totalTiketPcs)} Pcs`;
+      document.getElementById('panelTiketOmset').innerText = `Rp ${numberWithCommas(totalTiketOmset)}`;
     }
 
     // GITHUB API CORE REST HELPERS
     async function pushArrayToGithub(pathFile, dataArray) {
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${pathFile}`;
       
-      // Get existing SHA first if file exists
       let sha = '';
       try {
         const getRes = await fetch(url, {
@@ -788,6 +911,100 @@
       btn.innerHTML = `<i class="fas fa-save"></i> <span>Simpan & Buat Struk WA / PDF</span>`;
     }
 
+    // EDIT & DELETE HANDLERS
+    function openEditModal(type, orderId) {
+      const list = type === 'Baju' ? bajuOrders : tiketOrders;
+      const item = list.find(o => o.orderId === orderId);
+      if (!item) return;
+
+      document.getElementById('editItemType').value = type;
+      document.getElementById('editOrderId').value = item.orderId;
+      document.getElementById('editOrderIdDisplay').innerText = `ID: ${item.orderId}`;
+      document.getElementById('editNama').value = item.nama;
+      document.getElementById('editPcs').value = item.pcs;
+      document.getElementById('editHarga').value = item.hargaSatuan || (type === 'Baju' ? 150000 : 75000);
+      document.getElementById('editWa').value = item.whatsapp;
+
+      const sizeContainer = document.getElementById('editSizeContainer');
+      if (type === 'Baju') {
+        sizeContainer.classList.remove('hidden');
+        document.getElementById('editSize').value = item.size || 'M';
+      } else {
+        sizeContainer.classList.add('hidden');
+      }
+
+      const modal = document.getElementById('editModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeEditModal() {
+      const modal = document.getElementById('editModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function saveEditOrder(e) {
+      e.preventDefault();
+      const type = document.getElementById('editItemType').value;
+      const orderId = document.getElementById('editOrderId').value;
+      const btn = document.getElementById('btnEditSave');
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Menyimpan...`;
+
+      const list = type === 'Baju' ? bajuOrders : tiketOrders;
+      const index = list.findIndex(o => o.orderId === orderId);
+
+      if (index !== -1) {
+        const pcs = parseInt(document.getElementById('editPcs').value) || 1;
+        const hargaSatuan = parseInt(document.getElementById('editHarga').value) || 0;
+
+        list[index].nama = document.getElementById('editNama').value.trim();
+        list[index].pcs = pcs;
+        list[index].hargaSatuan = hargaSatuan;
+        list[index].totalHarga = pcs * hargaSatuan;
+        list[index].whatsapp = formatPhoneNumber(document.getElementById('editWa').value.trim());
+
+        if (type === 'Baju') {
+          list[index].size = document.getElementById('editSize').value;
+        }
+
+        saveLocalData();
+        if (type === 'Baju') {
+          renderBajuTable();
+          await pushArrayToGithub('data/baju_orders.json', bajuOrders);
+        } else {
+          renderTiketTable();
+          await pushArrayToGithub('data/tiket_orders.json', tiketOrders);
+        }
+
+        showToast("Riwayat berhasil diperbarui!");
+      }
+
+      btn.disabled = false;
+      btn.innerText = "Simpan Perubahan";
+      closeEditModal();
+    }
+
+    async function deleteOrder(type, orderId) {
+      if (!confirm(`Apakah Anda yakin ingin menghapus transaksi ${orderId}?`)) return;
+
+      if (type === 'Baju') {
+        bajuOrders = bajuOrders.filter(o => o.orderId !== orderId);
+        saveLocalData();
+        renderBajuTable();
+        await pushArrayToGithub('data/baju_orders.json', bajuOrders);
+      } else {
+        tiketOrders = tiketOrders.filter(o => o.orderId !== orderId);
+        saveLocalData();
+        renderTiketTable();
+        await pushArrayToGithub('data/tiket_orders.json', tiketOrders);
+      }
+
+      showToast(`Transaksi ${orderId} berhasil dihapus!`);
+    }
+
     // CALCULATION HELPERS
     function calculateBajuTotal() {
       const pcs = parseInt(document.getElementById('bajuPcs').value) || 0;
@@ -818,9 +1035,15 @@
           <td class="py-3 px-2">${item.whatsapp}</td>
           <td class="py-3 px-2 font-black text-bodRed">Rp ${numberWithCommas(item.totalHarga)}</td>
           <td class="py-3 px-2 text-gray-400 text-[10px]">${item.dateFormatted}</td>
-          <td class="py-3 px-2 text-center">
-            <button onclick='showReceipt(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="px-2.5 py-1 bg-bodRed/20 hover:bg-bodRed text-bodRed hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
-              <i class="fas fa-receipt"></i> Struk
+          <td class="py-3 px-2 text-center flex items-center justify-center gap-1.5">
+            <button onclick='showReceipt(${JSON.stringify(item).replace(/'/g, "&apos;")})' title="Struk" class="px-2 py-1 bg-bodRed/20 hover:bg-bodRed text-bodRed hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-receipt"></i>
+            </button>
+            <button onclick="openEditModal('Baju', '${item.orderId}')" title="Edit" class="px-2 py-1 bg-blue-500/20 hover:bg-blue-600 text-blue-400 hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteOrder('Baju', '${item.orderId}')" title="Hapus" class="px-2 py-1 bg-red-800/30 hover:bg-red-700 text-red-400 hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-trash-alt"></i>
             </button>
           </td>
         </tr>
@@ -842,9 +1065,15 @@
           <td class="py-3 px-2">${item.whatsapp}</td>
           <td class="py-3 px-2 font-black text-bodRed">Rp ${numberWithCommas(item.totalHarga)}</td>
           <td class="py-3 px-2 text-gray-400 text-[10px]">${item.dateFormatted}</td>
-          <td class="py-3 px-2 text-center">
-            <button onclick='showReceipt(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="px-2.5 py-1 bg-bodRed/20 hover:bg-bodRed text-bodRed hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
-              <i class="fas fa-receipt"></i> Struk
+          <td class="py-3 px-2 text-center flex items-center justify-center gap-1.5">
+            <button onclick='showReceipt(${JSON.stringify(item).replace(/'/g, "&apos;")})' title="Struk" class="px-2 py-1 bg-bodRed/20 hover:bg-bodRed text-bodRed hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-receipt"></i>
+            </button>
+            <button onclick="openEditModal('Tiket', '${item.orderId}')" title="Edit" class="px-2 py-1 bg-blue-500/20 hover:bg-blue-600 text-blue-400 hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteOrder('Tiket', '${item.orderId}')" title="Hapus" class="px-2 py-1 bg-red-800/30 hover:bg-red-700 text-red-400 hover:text-white rounded-lg font-sans font-bold text-[10px] transition-all">
+              <i class="fas fa-trash-alt"></i>
             </button>
           </td>
         </tr>
@@ -931,7 +1160,7 @@ ${data.tipe === 'Baju' ? `- Ukuran Baju: ${data.size}\n` : ''}- Jumlah: ${data.p
 - Total Bayar: *Rp ${numberWithCommas(data.totalHarga)}*
 
 =================================
-*Status:* TERSIMPAN DI DATABASE GITHUB
+*Status:* TERSIMPAN DI DATABASE
 _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan struk ini sebagai bukti transaksi resmi._`;
 
       const encoded = encodeURIComponent(message);

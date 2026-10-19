@@ -102,7 +102,29 @@
 
     </div>
   </header>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCPhTTD5cAjvojNu4pAEXOGEoIkipyPo5k",
+    authDomain: "bewareofdogs-af4a5.firebaseapp.com",
+    projectId: "bewareofdogs-af4a5",
+    storageBucket: "bewareofdogs-af4a5.firebasestorage.app",
+    messagingSenderId: "1087595396696",
+    appId: "1:1087595396696:web:f93af34a1842a1fbd6d42d",
+    measurementId: "G-P7PLP9DSK8"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
   <!-- MAIN CONTENT AREA -->
   <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
 

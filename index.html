@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beware Of Dogs - Official Store & Database System</title>
+  <title>Beware Of Dogs - Official Store & Automatic Database</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -72,10 +72,10 @@
       
       <!-- LOGO AREA (Preserving original photo shape intact) -->
       <div class="flex items-center gap-4">
-        <div class="relative group cursor-pointer" onclick="openConfigModal()">
+        <div class="relative group">
           <div class="absolute -inset-1 bg-gradient-to-r from-bodRed to-bodDarkRed rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-300"></div>
           <img 
-            src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" 
+            src="input_file_0.png" 
             alt="Beware Of Dogs Logo" 
             class="relative h-14 w-auto object-contain rounded-md border border-bodBorder bg-black"
             onerror="this.onerror=null; this.src='https://placehold.co/200x200/000000/ffffff?text=BEWARE+OF+DOGS';"
@@ -87,20 +87,17 @@
           </h1>
           <p class="text-[10px] text-gray-400 tracking-widest uppercase font-bold flex items-center gap-1.5">
             <span>DATABASE GITHUB INTEGRATED</span>
-            <span id="headerStatusBadge" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
+            <span id="headerStatusBadge" class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
           </p>
         </div>
       </div>
 
-      <!-- Quick Actions / GitHub Config Toggle Button -->
+      <!-- Quick Action Status Info -->
       <div class="flex items-center gap-2">
-        <button 
-          onclick="openConfigModal()" 
-          class="px-3.5 py-2 bg-bodCard hover:bg-bodBorder border border-bodBorder rounded-xl text-xs font-bold text-gray-200 flex items-center gap-2 transition-all shadow-md hover:border-bodRed"
-        >
+        <div class="px-3.5 py-2 bg-bodCard border border-bodBorder rounded-xl text-xs font-bold text-gray-200 flex items-center gap-2 shadow-md">
           <i class="fab fa-github text-base text-bodRed"></i>
-          <span id="configBtnText">Pengaturan GitHub</span>
-        </button>
+          <span>Auto-Sync Active (GitHub)</span>
+        </div>
       </div>
 
     </div>
@@ -116,7 +113,7 @@
       <!-- LOGO CENTER DISPLAY (Original shape preserved) -->
       <div class="flex justify-center mb-4">
         <img 
-          src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" 
+          src="input_file_0.png" 
           alt="Beware Of Dogs Logo Large" 
           class="h-28 sm:h-36 w-auto object-contain drop-shadow-[0_10px_25px_rgba(255,42,42,0.35)] transition-transform duration-500 hover:scale-105"
         >
@@ -126,7 +123,7 @@
         OFFICIAL STORE & AUTOMATIC DATABASE
       </h2>
       <p class="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto font-medium">
-        Pemesanan Kaos & Tiket Acara dengan simpan otomatis ke **GitHub Repository**, pembuatan Struk Digital WA, dan Ekspor Laporan PDF.
+        Pemesanan Kaos & Tiket Acara dengan simpan otomatis langsung ke **GitHub Repository**, pembuatan Struk Digital WA, dan Ekspor Laporan PDF.
       </p>
     </div>
 
@@ -177,7 +174,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-tshirt text-bodRed"></i> Form Pembelian Baju
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub / LocalStorage</p>
+            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub Repository & Local</p>
           </div>
           <span class="text-xs font-black bg-bodRed/20 border border-bodRed/50 text-bodRed px-3 py-1.5 rounded-lg self-start sm:self-auto">
             Official Merchandise
@@ -296,7 +293,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-ticket-alt text-bodRed"></i> Form Pembelian Tiket
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub / LocalStorage</p>
+            <p class="text-xs text-gray-400 mt-1">Data tersimpan otomatis di database GitHub Repository & Local</p>
           </div>
           <span class="text-xs font-black bg-bodRed/20 border border-bodRed/50 text-bodRed px-3 py-1.5 rounded-lg self-start sm:self-auto">
             Live Event Ticket
@@ -393,7 +390,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-tshirt text-bodRed"></i> Riwayat Pembelian Baju
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data riwayat transaksi baju tersimpan otomatis di GitHub / LocalStorage</p>
+            <p class="text-xs text-gray-400 mt-1">Data riwayat transaksi baju tersimpan otomatis di GitHub Repository</p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
@@ -401,7 +398,7 @@
               onclick="syncBajuData()" 
               class="px-3 py-2 bg-bodBorder hover:bg-gray-800 text-gray-200 text-xs font-bold rounded-xl transition-all flex items-center gap-2"
             >
-              <i class="fas fa-sync-alt" id="refreshBajuSpin"></i> Sync
+              <i class="fas fa-sync-alt" id="refreshBajuSpin"></i> Sync GitHub
             </button>
             <button 
               onclick="downloadPdfLaporan('baju')" 
@@ -444,7 +441,7 @@
             <h3 class="text-xl font-black text-white flex items-center gap-2 uppercase">
               <i class="fas fa-ticket-alt text-bodRed"></i> Riwayat Pembelian Tiket
             </h3>
-            <p class="text-xs text-gray-400 mt-1">Data riwayat transaksi tiket tersimpan otomatis di GitHub / LocalStorage</p>
+            <p class="text-xs text-gray-400 mt-1">Data riwayat transaksi tiket tersimpan otomatis di GitHub Repository</p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
@@ -452,7 +449,7 @@
               onclick="syncTiketData()" 
               class="px-3 py-2 bg-bodBorder hover:bg-gray-800 text-gray-200 text-xs font-bold rounded-xl transition-all flex items-center gap-2"
             >
-              <i class="fas fa-sync-alt" id="refreshTiketSpin"></i> Sync
+              <i class="fas fa-sync-alt" id="refreshTiketSpin"></i> Sync GitHub
             </button>
             <button 
               onclick="downloadPdfLaporan('tiket')" 
@@ -491,7 +488,7 @@
   <!-- HIDDEN PRINT AREA FOR REPORT PDF GENERATION -->
   <div id="pdfReportArea" class="hidden p-8 bg-black text-white font-sans max-w-2xl mx-auto border border-bodRed">
     <div class="flex items-center justify-between border-b-2 border-bodRed pb-4 mb-4">
-      <img src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" alt="Logo" class="h-16 w-auto object-contain">
+      <img src="input_file_0.png" alt="Logo" class="h-16 w-auto object-contain">
       <div class="text-right">
         <h2 id="pdfReportTitle" class="text-xl font-black text-bodRed uppercase">LAPORAN RIWAYAT TRANSAKSI</h2>
         <p class="text-xs text-gray-400">BEWARE OF DOGS OFFICIAL DATABASE</p>
@@ -500,92 +497,7 @@
     <div id="pdfReportContent" class="text-xs space-y-2"></div>
   </div>
 
-  <!-- MODAL 1: GITHUB CONFIGURATION MODAL -->
-  <div id="configModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-    <div class="bg-bodCard border border-bodBorder rounded-2xl max-w-lg w-full p-6 shadow-[0_0_50px_rgba(255,42,42,0.25)] relative">
-      <button onclick="closeConfigModal()" class="absolute right-4 top-4 text-gray-400 hover:text-white text-lg">
-        <i class="fas fa-times"></i>
-      </button>
-
-      <div class="flex items-center gap-3 border-b border-bodBorder pb-4 mb-5">
-        <div class="w-10 h-10 rounded-xl bg-bodRed/20 border border-bodRed/40 flex items-center justify-center text-bodRed text-xl">
-          <i class="fab fa-github"></i>
-        </div>
-        <div>
-          <h3 class="text-base font-black text-white uppercase">Pengaturan GitHub Database</h3>
-          <p class="text-xs text-gray-400">Integrasi Simpan Otomatis via GitHub REST API</p>
-        </div>
-      </div>
-
-      <form onsubmit="saveGithubConfig(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold uppercase text-gray-300 mb-1">GitHub Personal Access Token (PAT)</label>
-          <input 
-            type="password" 
-            id="cfgToken" 
-            placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" 
-            class="w-full bg-black border border-bodBorder focus:border-bodRed rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-gray-600 outline-none font-mono"
-          >
-          <p class="text-[10px] text-gray-500 mt-1">Dibutuhkan scope <code class="text-bodRed">repo</code> untuk commit otomatis.</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold uppercase text-gray-300 mb-1">GitHub Username / Owner</label>
-            <input 
-              type="text" 
-              id="cfgOwner" 
-              placeholder="Username GitHub" 
-              class="w-full bg-black border border-bodBorder focus:border-bodRed rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-gray-600 outline-none"
-            >
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold uppercase text-gray-300 mb-1">Repository Name</label>
-            <input 
-              type="text" 
-              id="cfgRepo" 
-              placeholder="nama-repository" 
-              class="w-full bg-black border border-bodBorder focus:border-bodRed rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-gray-600 outline-none"
-            >
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold uppercase text-gray-300 mb-1">Branch Name</label>
-          <input 
-            type="text" 
-            id="cfgBranch" 
-            value="main" 
-            placeholder="main" 
-            class="w-full bg-black border border-bodBorder focus:border-bodRed rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-gray-600 outline-none"
-          >
-        </div>
-
-        <!-- Connection Test Result Badge -->
-        <div id="testConnectionStatus" class="hidden text-xs p-3 rounded-xl font-bold text-center"></div>
-
-        <div class="flex gap-3 pt-2">
-          <button 
-            type="button" 
-            onclick="testGithubConnection()" 
-            class="flex-1 bg-bodBorder hover:bg-gray-800 text-gray-200 font-bold py-3 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-2"
-          >
-            <i class="fas fa-plug"></i> Tes Koneksi
-          </button>
-
-          <button 
-            type="submit" 
-            class="flex-1 bg-bodRed hover:bg-bodDarkRed text-white font-extrabold py-3 px-4 rounded-xl text-xs transition-all shadow-lg shadow-bodRed/30 flex items-center justify-center gap-2"
-          >
-            <i class="fas fa-save"></i> Simpan Config
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL 2: DIGITAL RECEIPT POPUP -->
+  <!-- DIGITAL RECEIPT POPUP -->
   <div id="receiptModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
     <div class="bg-black border-2 border-bodRed rounded-2xl max-w-md w-full overflow-hidden shadow-[0_0_50px_rgba(255,42,42,0.35)] relative">
       
@@ -596,7 +508,7 @@
           <button onclick="closeReceiptModal()" class="absolute right-4 top-4 text-white/80 hover:text-white text-lg">
             <i class="fas fa-times"></i>
           </button>
-          <img src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" alt="Beware Of Dogs Logo" class="h-14 w-auto mx-auto object-contain mb-2">
+          <img src="input_file_0.png" alt="Beware Of Dogs Logo" class="h-14 w-auto mx-auto object-contain mb-2">
           <h3 class="text-xl font-black text-white tracking-widest uppercase">BEWARE OF DOGS</h3>
           <p class="text-[10px] text-white/80 font-mono mt-0.5">OFFICIAL STRUK PEMBELIAN</p>
         </div>
@@ -638,7 +550,7 @@
 
           <div id="storageSaveBadge" class="bg-green-950/40 border border-green-800/60 rounded-xl p-2.5 text-center text-[11px] text-green-400 font-sans flex items-center justify-center gap-2">
             <i class="fas fa-check-circle"></i>
-            <span id="saveBadgeText">Data Tersimpan di Database</span>
+            <span id="saveBadgeText">Tersimpan Otomatis ke GitHub & Local</span>
           </div>
         </div>
       </div>
@@ -685,11 +597,11 @@
 
   <!-- CORE JAVASCRIPT LOGIC -->
   <script>
-    // CONFIG STATE
-    let githubConfig = {
-      token: '',
-      owner: '',
-      repo: '',
+    // HARDCODED GITHUB CREDENTIALS
+    const githubConfig = {
+      token: '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',
+      owner: 'BewareOfDogs',
+      repo: 'database',
       branch: 'main'
     };
 
@@ -700,60 +612,15 @@
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
-      loadGithubConfig();
       loadLocalData();
       calculateBajuTotal();
       calculateTiketTotal();
-    });
-
-    function loadGithubConfig() {
-      const saved = localStorage.getItem('bod_github_config');
-      if (saved) {
-        try {
-          githubConfig = JSON.parse(saved);
-          document.getElementById('cfgToken').value = githubConfig.token || '';
-          document.getElementById('cfgOwner').value = githubConfig.owner || '';
-          document.getElementById('cfgRepo').value = githubConfig.repo || '';
-          document.getElementById('cfgBranch').value = githubConfig.branch || 'main';
-          updateHeaderBadge(true);
-        } catch (e) {
-          console.error(e);
-        }
-      } else {
-        updateHeaderBadge(false);
-      }
-    }
-
-    function saveGithubConfig(e) {
-      e.preventDefault();
-      githubConfig.token = document.getElementById('cfgToken').value.trim();
-      githubConfig.owner = document.getElementById('cfgOwner').value.trim();
-      githubConfig.repo = document.getElementById('cfgRepo').value.trim();
-      githubConfig.branch = document.getElementById('cfgBranch').value.trim() || 'main';
-
-      localStorage.setItem('bod_github_config', JSON.stringify(githubConfig));
-      showToast('Konfigurasi GitHub tersimpan di LocalStorage!');
-      updateHeaderBadge(true);
-      closeConfigModal();
-
-      // Sync data to GitHub upon config save
+      // Auto-sync initial fetch from GitHub
       syncBajuData();
       syncTiketData();
-    }
+    });
 
-    function updateHeaderBadge(isConfigured) {
-      const badge = document.getElementById('headerStatusBadge');
-      const text = document.getElementById('configBtnText');
-      if (isConfigured && githubConfig.token && githubConfig.repo) {
-        badge.className = "inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse";
-        text.innerText = "GitHub Terhubung";
-      } else {
-        badge.className = "inline-block w-2 h-2 rounded-full bg-red-500";
-        text.innerText = "Set Config GitHub";
-      }
-    }
-
-    // LOCALSTORAGE FALLBACK DATA HANDLERS
+    // LOCALSTORAGE BACKUP DATA HANDLERS
     function loadLocalData() {
       const localBaju = localStorage.getItem('bod_baju_orders');
       if (localBaju) bajuOrders = JSON.parse(localBaju);
@@ -771,49 +638,7 @@
     }
 
     // GITHUB API CORE REST HELPERS
-    async function testGithubConnection() {
-      const token = document.getElementById('cfgToken').value.trim();
-      const owner = document.getElementById('cfgOwner').value.trim();
-      const repo = document.getElementById('cfgRepo').value.trim();
-      const statusBox = document.getElementById('testConnectionStatus');
-
-      statusBox.classList.remove('hidden', 'bg-green-900/40', 'text-green-400', 'bg-red-900/40', 'text-red-400');
-      statusBox.innerText = "Memeriksa koneksi ke GitHub...";
-      statusBox.classList.add('bg-gray-800', 'text-gray-300');
-
-      if (!token || !owner || !repo) {
-        statusBox.innerText = "Lengkapi Token, Username, dan Repo Name.";
-        statusBox.className = "text-xs p-3 rounded-xl font-bold text-center bg-red-900/40 text-red-400";
-        return;
-      }
-
-      try {
-        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-          headers: {
-            'Authorization': `token ${token}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-
-        if (response.ok) {
-          statusBox.innerText = "Koneksi Berhasil! Repository ditemukan.";
-          statusBox.className = "text-xs p-3 rounded-xl font-bold text-center bg-green-900/40 text-green-400";
-        } else {
-          const err = await response.json();
-          statusBox.innerText = `Gagal: ${err.message || response.statusText}`;
-          statusBox.className = "text-xs p-3 rounded-xl font-bold text-center bg-red-900/40 text-red-400";
-        }
-      } catch (err) {
-        statusBox.innerText = "Gagal terhubung ke GitHub API.";
-        statusBox.className = "text-xs p-3 rounded-xl font-bold text-center bg-red-900/40 text-red-400";
-      }
-    }
-
     async function pushArrayToGithub(pathFile, dataArray) {
-      if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
-        return false;
-      }
-
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${pathFile}`;
       
       // Get existing SHA first if file exists
@@ -841,24 +666,25 @@
       };
       if (sha) body.sha = sha;
 
-      const putRes = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `token ${githubConfig.token}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
+      try {
+        const putRes = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
 
-      return putRes.ok;
+        return putRes.ok;
+      } catch (err) {
+        console.error("Error pushing to GitHub:", err);
+        return false;
+      }
     }
 
     async function fetchArrayFromGithub(pathFile) {
-      if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
-        return null;
-      }
-
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${pathFile}?ref=${githubConfig.branch || 'main'}`;
       try {
         const res = await fetch(url, {
@@ -872,7 +698,7 @@
         const contentStr = decodeURIComponent(escape(atob(fileData.content)));
         return JSON.parse(contentStr);
       } catch (err) {
-        console.error("Fetch error:", err);
+        console.error("Fetch error from GitHub:", err);
         return null;
       }
     }
@@ -882,7 +708,7 @@
       e.preventDefault();
       const btn = document.getElementById('btnBajuSubmit');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Menyimpan...</span>`;
+      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Menyimpan ke GitHub...</span>`;
 
       const nama = document.getElementById('bajuNama').value.trim();
       const size = document.getElementById('bajuSize').value;
@@ -911,10 +737,7 @@
       saveLocalData();
       renderBajuTable();
 
-      let isGithubSaved = false;
-      if (githubConfig.token) {
-        isGithubSaved = await pushArrayToGithub('data/baju_orders.json', bajuOrders);
-      }
+      const isGithubSaved = await pushArrayToGithub('data/baju_orders.json', bajuOrders);
 
       showReceipt(newOrder, isGithubSaved);
       document.getElementById('formBaju').reset();
@@ -928,7 +751,7 @@
       e.preventDefault();
       const btn = document.getElementById('btnTiketSubmit');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Menyimpan...</span>`;
+      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Menyimpan ke GitHub...</span>`;
 
       const nama = document.getElementById('tiketNama').value.trim();
       const pcs = parseInt(document.getElementById('tiketPcs').value) || 1;
@@ -955,10 +778,7 @@
       saveLocalData();
       renderTiketTable();
 
-      let isGithubSaved = false;
-      if (githubConfig.token) {
-        isGithubSaved = await pushArrayToGithub('data/tiket_orders.json', tiketOrders);
-      }
+      const isGithubSaved = await pushArrayToGithub('data/tiket_orders.json', tiketOrders);
 
       showReceipt(newOrder, isGithubSaved);
       document.getElementById('formTiket').reset();
@@ -989,7 +809,7 @@
         return;
       }
 
-      tbody.innerHTML = bajuOrders.map((item, index) => `
+      tbody.innerHTML = bajuOrders.map((item) => `
         <tr class="hover:bg-bodCard/80 transition-colors">
           <td class="py-3 px-2 font-bold text-bodRed">${item.orderId}</td>
           <td class="py-3 px-2 font-bold font-sans">${escapeHtml(item.nama)}</td>
@@ -1014,7 +834,7 @@
         return;
       }
 
-      tbody.innerHTML = tiketOrders.map((item, index) => `
+      tbody.innerHTML = tiketOrders.map((item) => `
         <tr class="hover:bg-bodCard/80 transition-colors">
           <td class="py-3 px-2 font-bold text-bodRed">${item.orderId}</td>
           <td class="py-3 px-2 font-bold font-sans">${escapeHtml(item.nama)}</td>
@@ -1033,40 +853,34 @@
 
     async function syncBajuData() {
       const spin = document.getElementById('refreshBajuSpin');
-      spin.classList.add('fa-spin');
-      if (githubConfig.token) {
-        const remote = await fetchArrayFromGithub('data/baju_orders.json');
-        if (remote && Array.isArray(remote)) {
-          bajuOrders = remote;
-          saveLocalData();
-          renderBajuTable();
-          showToast("Data riwayat baju disinkronkan dari GitHub!");
-        }
-      } else {
-        showToast("GitHub belum dikonfigurasi. Menampilkan data LocalStorage.");
+      if (spin) spin.classList.add('fa-spin');
+      
+      const remote = await fetchArrayFromGithub('data/baju_orders.json');
+      if (remote && Array.isArray(remote)) {
+        bajuOrders = remote;
+        saveLocalData();
+        renderBajuTable();
+        showToast("Data baju ter-sync dari GitHub!");
       }
-      spin.classList.remove('fa-spin');
+      if (spin) spin.classList.remove('fa-spin');
     }
 
     async function syncTiketData() {
       const spin = document.getElementById('refreshTiketSpin');
-      spin.classList.add('fa-spin');
-      if (githubConfig.token) {
-        const remote = await fetchArrayFromGithub('data/tiket_orders.json');
-        if (remote && Array.isArray(remote)) {
-          tiketOrders = remote;
-          saveLocalData();
-          renderTiketTable();
-          showToast("Data riwayat tiket disinkronkan dari GitHub!");
-        }
-      } else {
-        showToast("GitHub belum dikonfigurasi. Menampilkan data LocalStorage.");
+      if (spin) spin.classList.add('fa-spin');
+
+      const remote = await fetchArrayFromGithub('data/tiket_orders.json');
+      if (remote && Array.isArray(remote)) {
+        tiketOrders = remote;
+        saveLocalData();
+        renderTiketTable();
+        showToast("Data tiket ter-sync dari GitHub!");
       }
-      spin.classList.remove('fa-spin');
+      if (spin) spin.classList.remove('fa-spin');
     }
 
     // RECEIPT & WHATSAPP GENERATION
-    function showReceipt(data, isGithubSaved = false) {
+    function showReceipt(data, isGithubSaved = true) {
       currentReceiptData = data;
       document.getElementById('recId').innerText = data.orderId;
       document.getElementById('recTipe').innerText = data.tipe === 'Baju' ? 'Merchandise (Baju)' : 'Tiket Acara';
@@ -1080,9 +894,9 @@
 
       const badgeText = document.getElementById('saveBadgeText');
       if (isGithubSaved) {
-        badgeText.innerText = "Tersimpan ke GitHub Repository & Local";
+        badgeText.innerText = "Tersimpan ke GitHub Repository & LocalStorage";
       } else {
-        badgeText.innerText = "Tersimpan di LocalStorage";
+        badgeText.innerText = "Tersimpan di LocalStorage (Offline Backup)";
       }
 
       const modal = document.getElementById('receiptModal');
@@ -1117,7 +931,7 @@ ${data.tipe === 'Baju' ? `- Ukuran Baju: ${data.size}\n` : ''}- Jumlah: ${data.p
 - Total Bayar: *Rp ${numberWithCommas(data.totalHarga)}*
 
 =================================
-*Status:* TERSIMPAN DI DATABASE
+*Status:* TERSIMPAN DI DATABASE GITHUB
 _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan struk ini sebagai bukti transaksi resmi._`;
 
       const encoded = encodeURIComponent(message);
@@ -1208,19 +1022,6 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
       html2pdf().set(opt).from(reportArea).save().then(() => {
         reportArea.classList.add('hidden');
       });
-    }
-
-    // MODAL UI CONTROL
-    function openConfigModal() {
-      const modal = document.getElementById('configModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeConfigModal() {
-      const modal = document.getElementById('configModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
     }
 
     // TAB SWITCHER

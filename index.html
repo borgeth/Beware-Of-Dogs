@@ -67,8 +67,12 @@
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-bodRed selection:text-white">
 
   <!-- LOGIN OVERLAY / MODAL -->
-  <div id="loginModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-bodCard border-2 border-bodRed rounded-2xl max-w-sm w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(255,42,42,0.35)] text-center relative">
+<!-- LOGIN OVERLAY / MODAL -->
+  <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cover bg-center relative" style="background-image: url('WhatsApp Video 2026-10-19 at 22.57.43.mp4');">
+    <!-- Overlay hitam transparan agar form login tetap terbaca jelas di atas GIF -->
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+    <div class="bg-bodCard/95 border-2 border-bodRed rounded-2xl max-w-sm w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(255,42,42,0.35)] text-center relative z-10">
       <div class="flex justify-center mb-4">
         <img 
           src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg.png" 

@@ -67,9 +67,7 @@
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-bodRed selection:text-white">
 
   <!-- LOGIN OVERLAY / MODAL -->
-<!-- LOGIN OVERLAY / MODAL -->
   <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cover bg-center relative" style="background-image: url('WhatsApp Video 2026-10-19 at 22.57.43.mp4');">
-    <!-- Overlay hitam transparan agar form login tetap terbaca jelas di atas GIF -->
     <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
 
     <div class="bg-bodCard/95 border-2 border-bodRed rounded-2xl max-w-sm w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(255,42,42,0.35)] text-center relative z-10">
@@ -117,14 +115,13 @@
     </div>
   </div>
 
-  <!-- MAIN APP CONTAINER (Hidden until logged in) -->
+  <!-- MAIN APP CONTAINER -->
   <div id="appContainer" class="hidden flex-col min-h-screen justify-between">
 
     <!-- HEADER -->
     <header class="relative border-b border-bodBorder bg-black/90 backdrop-blur-md sticky top-0 z-40">
       <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
         
-        <!-- LOGO AREA -->
         <div class="flex items-center gap-4">
           <div class="relative group">
             <div class="absolute -inset-1 bg-gradient-to-r from-bodRed to-bodDarkRed rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-300"></div>
@@ -146,7 +143,6 @@
           </div>
         </div>
 
-        <!-- Quick Action Status Info & Logout -->
         <div class="flex items-center gap-2">
           <div class="px-3 py-2 bg-bodCard border border-bodBorder rounded-xl text-xs font-bold text-gray-200 flex items-center gap-2 shadow-md">
             <i class="fas fa-database text-bodRed"></i>
@@ -322,7 +318,6 @@
               </div>
             </div>
 
-            <!-- Price summary box -->
             <div class="bg-black/60 border border-bodBorder rounded-xl p-4 flex justify-between items-center">
               <span class="text-xs text-gray-400 font-bold uppercase">Total Pembayaran:</span>
               <span id="bajuTotalDisplay" class="text-xl font-black text-bodRed">Rp 180.000</span>
@@ -419,7 +414,6 @@
               </div>
             </div>
 
-            <!-- Price summary box -->
             <div class="bg-black/60 border border-bodBorder rounded-xl p-4 flex justify-between items-center">
               <span class="text-xs text-gray-400 font-bold uppercase">Total Pembayaran:</span>
               <span id="tiketTotalDisplay" class="text-xl font-black text-bodRed">Rp 20.000</span>
@@ -443,7 +437,6 @@
       <section id="tabHistoryBaju" class="hidden">
         <div class="bg-bodCard border border-bodBorder rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
           
-          <!-- PANEL HASIL TERJUAL BAJU -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
               <div class="w-12 h-12 rounded-xl bg-bodRed/20 border border-bodRed/50 flex items-center justify-center text-bodRed text-xl">
@@ -484,6 +477,31 @@
             </div>
           </div>
 
+          <!-- PENCARIAN & FILTER NAMA PEMESAN BAJU -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="relative">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+              <input 
+                type="text" 
+                id="searchBajuInput" 
+                oninput="filterBajuData()" 
+                placeholder="Cari ID, Nama, atau WhatsApp..." 
+                class="w-full bg-black/90 border border-bodBorder focus:border-bodRed rounded-xl py-2.5 pl-10 pr-4 text-xs text-white placeholder-gray-500 outline-none"
+              >
+            </div>
+            <div class="relative">
+              <i class="fas fa-filter absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+              <select 
+                id="filterBajuNama" 
+                onchange="filterBajuData()" 
+                class="w-full bg-black/90 border border-bodBorder focus:border-bodRed rounded-xl py-2.5 pl-10 pr-8 text-xs text-white outline-none appearance-none cursor-pointer"
+              >
+                <option value="">Semua Nama Pemesan</option>
+              </select>
+              <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-[10px]"></i>
+            </div>
+          </div>
+
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs font-mono">
               <thead>
@@ -512,7 +530,6 @@
       <section id="tabHistoryTiket" class="hidden">
         <div class="bg-bodCard border border-bodBorder rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
           
-          <!-- PANEL HASIL TERJUAL TIKET -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-black/80 border border-bodRed/40 p-5 rounded-2xl flex items-center gap-4">
               <div class="w-12 h-12 rounded-xl bg-bodRed/20 border border-bodRed/50 flex items-center justify-center text-bodRed text-xl">
@@ -550,6 +567,31 @@
               >
                 <i class="fas fa-file-pdf"></i> Download PDF Laporan Tiket
               </button>
+            </div>
+          </div>
+
+          <!-- PENCARIAN & FILTER NAMA PEMESAN TIKET -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="relative">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+              <input 
+                type="text" 
+                id="searchTiketInput" 
+                oninput="filterTiketData()" 
+                placeholder="Cari ID, Nama, atau WhatsApp..." 
+                class="w-full bg-black/90 border border-bodBorder focus:border-bodRed rounded-xl py-2.5 pl-10 pr-4 text-xs text-white placeholder-gray-500 outline-none"
+              >
+            </div>
+            <div class="relative">
+              <i class="fas fa-filter absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+              <select 
+                id="filterTiketNama" 
+                onchange="filterTiketData()" 
+                class="w-full bg-black/90 border border-bodBorder focus:border-bodRed rounded-xl py-2.5 pl-10 pr-8 text-xs text-white outline-none appearance-none cursor-pointer"
+              >
+                <option value="">Semua Nama Pemesan</option>
+              </select>
+              <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-[10px]"></i>
             </div>
           </div>
 
@@ -637,32 +679,27 @@
       </div>
     </div>
 
-    <!-- HIDDEN PRINT AREA FOR REPORT PDF GENERATION -->
-<!-- HIDDEN AREA UNTUK GENERATE PDF LAPORAN -->
-<div id="pdfReportArea" class="hidden">
-  <div id="pdfReportContentWrapper" style="padding: 24px; background-color: #000000; color: #ffffff; font-family: 'Montserrat', sans-serif; width: 800px; margin: 0 auto;">
-    <div style="display: flex; justify-content: space-between; items-center: center; border-bottom: 2px solid #ff2a2a; padding-bottom: 12px; margin-bottom: 16px;">
-      <div>
-        <h2 id="pdfReportTitle" style="font-size: 18px; font-weight: 900; color: #ff2a2a; text-transform: uppercase; margin: 0;">LAPORAN RIWAYAT TRANSAKSI</h2>
-        <p style="font-size: 11px; color: #aaa; margin: 4px 0 0 0;">BEWARE OF DOGS OFFICIAL DATABASE</p>
-      </div>
-      <div style="text-align: right; font-size: 10px; color: #888;">
-        <p style="margin: 0;">Dicetak pada: <span id="pdfPrintDate">-</span></p>
+    <!-- HIDDEN AREA UNTUK GENERATE PDF LAPORAN -->
+    <div id="pdfReportArea" class="hidden">
+      <div id="pdfReportContentWrapper" style="padding: 24px; background-color: #000000; color: #ffffff; font-family: 'Montserrat', sans-serif; width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff2a2a; padding-bottom: 12px; margin-bottom: 16px;">
+          <div>
+            <h2 id="pdfReportTitle" style="font-size: 18px; font-weight: 900; color: #ff2a2a; text-transform: uppercase; margin: 0;">LAPORAN RIWAYAT TRANSAKSI</h2>
+            <p style="font-size: 11px; color: #aaa; margin: 4px 0 0 0;">BEWARE OF DOGS OFFICIAL DATABASE</p>
+          </div>
+          <div style="text-align: right; font-size: 10px; color: #888;">
+            <p style="margin: 0;">Dicetak pada: <span id="pdfPrintDate">-</span></p>
+          </div>
+        </div>
+        <div id="pdfReportContent"></div>
       </div>
     </div>
-    
-    <!-- Tempat Tabel Laporan Rendition -->
-    <div id="pdfReportContent"></div>
-  </div>
-</div>
 
     <!-- DIGITAL RECEIPT POPUP -->
     <div id="receiptModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
       <div class="bg-black border-2 border-bodRed rounded-2xl max-w-md w-full overflow-hidden shadow-[0_0_50px_rgba(255,42,42,0.35)] relative">
         
-        <!-- Container for PDF rendering -->
         <div id="receiptPrintCard">
-          <!-- Receipt Header -->
           <div class="bg-gradient-to-r from-bodRed to-bodDarkRed p-5 text-center relative">
             <button onclick="closeReceiptModal()" class="absolute right-4 top-4 text-white/80 hover:text-white text-lg">
               <i class="fas fa-times"></i>
@@ -672,7 +709,6 @@
             <p class="text-[10px] text-white/80 font-mono mt-0.5">OFFICIAL STRUK PEMBELIAN</p>
           </div>
 
-          <!-- Receipt Body -->
           <div class="p-6 font-mono text-xs space-y-3.5 bg-bodCard text-gray-200">
             <div class="flex justify-between items-center border-b border-bodBorder pb-2.5">
               <span class="text-gray-400">NO. TRANSAKSI:</span>
@@ -709,12 +745,11 @@
 
             <div id="storageSaveBadge" class="bg-green-950/40 border border-green-800/60 rounded-xl p-2.5 text-center text-[11px] text-green-400 font-sans flex items-center justify-center gap-2">
               <i class="fas fa-check-circle"></i>
-              <span id="saveBadgeText">Tersimpan Realtime ke BOD Database</span>
+              <span id="saveBadgeText">Tersimpan Realtime ke Firebase Database</span>
             </div>
           </div>
         </div>
 
-        <!-- Receipt Action Buttons -->
         <div class="p-4 bg-black border-t border-bodBorder flex flex-col gap-2 font-sans">
           <button 
             onclick="sendReceiptToWa()" 
@@ -777,13 +812,11 @@
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
 
-    // Global arrays & variables
     window.bajuOrders = [];
     window.tiketOrders = [];
     window.currentReceiptData = null;
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Check login session
       const isLoggedIn = sessionStorage.getItem('bod_logged_in');
       if (isLoggedIn === 'true') {
         document.getElementById('loginModal').classList.add('hidden');
@@ -797,7 +830,6 @@
       initRealtimeListeners();
     });
 
-    // LOGIN / LOGOUT HANDLERS
     window.handleLogin = function(e) {
       e.preventDefault();
       const user = document.getElementById('loginUser').value.trim();
@@ -820,15 +852,14 @@
       location.reload();
     }
 
-    // FIREBASE REALTIME LISTENERS (Autosave & Sync Realtime)
     function initRealtimeListeners() {
       const bajuRef = ref(db, 'baju_orders');
       onValue(bajuRef, (snapshot) => {
         const data = snapshot.val();
         window.bajuOrders = data ? Object.values(data) : [];
-        // Sort descending by orderId or timestamp if needed
         window.bajuOrders.sort((a, b) => b.orderId.localeCompare(a.orderId));
-        renderBajuTable();
+        updateNamaFilterOptions('baju');
+        filterBajuData();
         updatePanels();
       });
 
@@ -837,12 +868,12 @@
         const data = snapshot.val();
         window.tiketOrders = data ? Object.values(data) : [];
         window.tiketOrders.sort((a, b) => b.orderId.localeCompare(a.orderId));
-        renderTiketTable();
+        updateNamaFilterOptions('tiket');
+        filterTiketData();
         updatePanels();
       });
     }
 
-    // UPDATE SUMMARY STATS PANELS
     function updatePanels() {
       const totalBajuPcs = window.bajuOrders.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
       const totalBajuOmset = window.bajuOrders.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
@@ -857,7 +888,61 @@
       document.getElementById('panelTiketOmset').innerText = `Rp ${numberWithCommas(totalTiketOmset)}`;
     }
 
-    // FORM HANDLERS
+    // UPDATE DROPDOWN FILTER NAMA UNIK
+    function updateNamaFilterOptions(type) {
+      const list = type === 'baju' ? window.bajuOrders : window.tiketOrders;
+      const selectEl = document.getElementById(type === 'baju' ? 'filterBajuNama' : 'filterTiketNama');
+      const currentValue = selectEl.value;
+
+      // Ambil daftar nama unik
+      const uniqueNames = [...new Set(list.map(item => item.nama))].sort();
+
+      let optionsHtml = `<option value="">Semua Nama Pemesan</option>`;
+      uniqueNames.forEach(name => {
+        optionsHtml += `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`;
+      });
+
+      selectEl.innerHTML = optionsHtml;
+      selectEl.value = uniqueNames.includes(currentValue) ? currentValue : "";
+    }
+
+    // FILTER & SEARCH LOGIC BAJU
+    window.filterBajuData = function() {
+      const keyword = document.getElementById('searchBajuInput').value.toLowerCase();
+      const selectedName = document.getElementById('filterBajuNama').value;
+
+      const filtered = window.bajuOrders.filter(item => {
+        const matchName = selectedName === "" || item.nama === selectedName;
+        const matchKeyword = 
+          item.orderId.toLowerCase().includes(keyword) ||
+          item.nama.toLowerCase().includes(keyword) ||
+          item.whatsapp.toLowerCase().includes(keyword) ||
+          (item.size && item.size.toLowerCase().includes(keyword));
+
+        return matchName && matchKeyword;
+      });
+
+      renderBajuTable(filtered);
+    }
+
+    // FILTER & SEARCH LOGIC TIKET
+    window.filterTiketData = function() {
+      const keyword = document.getElementById('searchTiketInput').value.toLowerCase();
+      const selectedName = document.getElementById('filterTiketNama').value;
+
+      const filtered = window.tiketOrders.filter(item => {
+        const matchName = selectedName === "" || item.nama === selectedName;
+        const matchKeyword = 
+          item.orderId.toLowerCase().includes(keyword) ||
+          item.nama.toLowerCase().includes(keyword) ||
+          item.whatsapp.toLowerCase().includes(keyword);
+
+        return matchName && matchKeyword;
+      });
+
+      renderTiketTable(filtered);
+    }
+
     window.handleBajuOrder = async function(e) {
       e.preventDefault();
       const btn = document.getElementById('btnBajuSubmit');
@@ -867,7 +952,7 @@
       const nama = document.getElementById('bajuNama').value.trim();
       const size = document.getElementById('bajuSize').value;
       const pcs = parseInt(document.getElementById('bajuPcs').value) || 1;
-      const hargaSatuan = parseInt(document.getElementById('bajuHarga').value) || 150000;
+      const hargaSatuan = parseInt(document.getElementById('bajuHarga').value) || 180000;
       let wa = document.getElementById('bajuWa').value.trim();
 
       wa = formatPhoneNumber(wa);
@@ -875,17 +960,7 @@
       const dateFormatted = new Date().toLocaleString('id-ID');
       const orderId = 'BOD-SHIRT-' + Date.now().toString().slice(-6);
 
-      const newOrder = {
-        orderId,
-        tipe: 'Baju',
-        nama,
-        size,
-        pcs,
-        hargaSatuan,
-        totalHarga,
-        whatsapp: wa,
-        dateFormatted
-      };
+      const newOrder = { orderId, tipe: 'Baju', nama, size, pcs, hargaSatuan, totalHarga, whatsapp: wa, dateFormatted };
 
       try {
         await set(ref(db, 'baju_orders/' + orderId), newOrder);
@@ -910,7 +985,7 @@
 
       const nama = document.getElementById('tiketNama').value.trim();
       const pcs = parseInt(document.getElementById('tiketPcs').value) || 1;
-      const hargaSatuan = parseInt(document.getElementById('tiketHarga').value) || 75000;
+      const hargaSatuan = parseInt(document.getElementById('tiketHarga').value) || 20000;
       let wa = document.getElementById('tiketWa').value.trim();
 
       wa = formatPhoneNumber(wa);
@@ -918,16 +993,7 @@
       const dateFormatted = new Date().toLocaleString('id-ID');
       const orderId = 'BOD-TKT-' + Date.now().toString().slice(-6);
 
-      const newOrder = {
-        orderId,
-        tipe: 'Tiket',
-        nama,
-        pcs,
-        hargaSatuan,
-        totalHarga,
-        whatsapp: wa,
-        dateFormatted
-      };
+      const newOrder = { orderId, tipe: 'Tiket', nama, pcs, hargaSatuan, totalHarga, whatsapp: wa, dateFormatted };
 
       try {
         await set(ref(db, 'tiket_orders/' + orderId), newOrder);
@@ -944,7 +1010,6 @@
       btn.innerHTML = `<i class="fas fa-save"></i> <span>Simpan & Buat Struk WA / PDF</span>`;
     }
 
-    // EDIT & DELETE HANDLERS
     window.openEditModal = function(type, orderId) {
       const list = type === 'Baju' ? window.bajuOrders : window.tiketOrders;
       const item = list.find(o => o.orderId === orderId);
@@ -955,7 +1020,7 @@
       document.getElementById('editOrderIdDisplay').innerText = `ID: ${item.orderId}`;
       document.getElementById('editNama').value = item.nama;
       document.getElementById('editPcs').value = item.pcs;
-      document.getElementById('editHarga').value = item.hargaSatuan || (type === 'Baju' ? 150000 : 75000);
+      document.getElementById('editHarga').value = item.hargaSatuan || (type === 'Baju' ? 180000 : 20000);
       document.getElementById('editWa').value = item.whatsapp;
 
       const sizeContainer = document.getElementById('editSizeContainer');
@@ -1031,7 +1096,6 @@
       }
     }
 
-    // CALCULATION HELPERS
     window.calculateBajuTotal = function() {
       const pcs = parseInt(document.getElementById('bajuPcs').value) || 0;
       const harga = parseInt(document.getElementById('bajuHarga').value) || 0;
@@ -1044,15 +1108,14 @@
       document.getElementById('tiketTotalDisplay').innerText = 'Rp ' + numberWithCommas(pcs * harga);
     }
 
-    // TABLE RENDERING
-    function renderBajuTable() {
+    function renderBajuTable(dataList) {
       const tbody = document.getElementById('tableBajuBody');
-      if (window.bajuOrders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-gray-500 italic">Belum ada riwayat transaksi baju.</td></tr>`;
+      if (!dataList || dataList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-gray-500 italic">Tidak ada data riwayat baju yang ditemukan.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = window.bajuOrders.map((item) => `
+      tbody.innerHTML = dataList.map((item) => `
         <tr class="hover:bg-bodCard/80 transition-colors">
           <td class="py-3 px-2 font-bold text-bodRed">${item.orderId}</td>
           <td class="py-3 px-2 font-bold font-sans">${escapeHtml(item.nama)}</td>
@@ -1076,14 +1139,14 @@
       `).join('');
     }
 
-    function renderTiketTable() {
+    function renderTiketTable(dataList) {
       const tbody = document.getElementById('tableTiketBody');
-      if (window.tiketOrders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-gray-500 italic">Belum ada riwayat transaksi tiket.</td></tr>`;
+      if (!dataList || dataList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-gray-500 italic">Tidak ada data riwayat tiket yang ditemukan.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = window.tiketOrders.map((item) => `
+      tbody.innerHTML = dataList.map((item) => `
         <tr class="hover:bg-bodCard/80 transition-colors">
           <td class="py-3 px-2 font-bold text-bodRed">${item.orderId}</td>
           <td class="py-3 px-2 font-bold font-sans">${escapeHtml(item.nama)}</td>
@@ -1106,8 +1169,7 @@
       `).join('');
     }
 
-    // RECEIPT & WHATSAPP GENERATION
-    window.showReceipt = function(data, isFirebaseSaved = true) {
+    window.showReceipt = function(data) {
       window.currentReceiptData = data;
       document.getElementById('recId').innerText = data.orderId;
       document.getElementById('recTipe').innerText = data.tipe === 'Baju' ? 'Merchandise (Baju)' : 'Tiket Acara';
@@ -1118,9 +1180,6 @@
       document.getElementById('recWa').innerText = data.whatsapp;
       document.getElementById('recTotal').innerText = 'Rp ' + numberWithCommas(data.totalHarga);
       document.getElementById('recTanggal').innerText = data.dateFormatted;
-
-      const badgeText = document.getElementById('saveBadgeText');
-      badgeText.innerText = "Tersimpan Realtime ke Firebase Database";
 
       const modal = document.getElementById('receiptModal');
       modal.classList.remove('hidden');
@@ -1161,7 +1220,6 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
       window.open(`https://wa.me/${data.whatsapp}?text=${encoded}`, '_blank');
     }
 
-    // PDF GENERATION FUNCTIONS
     window.downloadReceiptPdf = function() {
       if (!window.currentReceiptData) return;
       const element = document.getElementById('receiptPrintCard');
@@ -1177,92 +1235,97 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
       html2pdf().set(opt).from(element).save();
     }
 
-window.downloadPdfLaporan = function(type) {
-  const reportTitle = document.getElementById('pdfReportTitle');
-  const reportContent = document.getElementById('pdfReportContent');
-  const reportArea = document.getElementById('pdfReportArea');
-  const reportWrapper = document.getElementById('pdfReportContentWrapper');
-  const printDateEl = document.getElementById('pdfPrintDate');
+    window.downloadPdfLaporan = function(type) {
+      const reportTitle = document.getElementById('pdfReportTitle');
+      const reportContent = document.getElementById('pdfReportContent');
+      const reportArea = document.getElementById('pdfReportArea');
+      const reportWrapper = document.getElementById('pdfReportContentWrapper');
+      const printDateEl = document.getElementById('pdfPrintDate');
 
-  const dataList = type === 'baju' ? window.bajuOrders : window.tiketOrders;
+      // Ambil data sesuai pencarian/filter aktif saat didownload
+      const dataList = type === 'baju' 
+        ? window.bajuOrders.filter(item => {
+            const kw = document.getElementById('searchBajuInput').value.toLowerCase();
+            const nm = document.getElementById('filterBajuNama').value;
+            return (nm === "" || item.nama === nm) && (item.orderId.toLowerCase().includes(kw) || item.nama.toLowerCase().includes(kw) || item.whatsapp.toLowerCase().includes(kw));
+          })
+        : window.tiketOrders.filter(item => {
+            const kw = document.getElementById('searchTiketInput').value.toLowerCase();
+            const nm = document.getElementById('filterTiketNama').value;
+            return (nm === "" || item.nama === nm) && (item.orderId.toLowerCase().includes(kw) || item.nama.toLowerCase().includes(kw) || item.whatsapp.toLowerCase().includes(kw));
+          });
 
-  if (!dataList || dataList.length === 0) {
-    showToast(`Belum ada data riwayat ${type} untuk didownload!`, 'error');
-    return;
-  }
+      if (!dataList || dataList.length === 0) {
+        showToast(`Tidak ada data riwayat ${type} yang sesuai untuk didownload!`, 'error');
+        return;
+      }
 
-  // Set tanggal cetak & judul
-  printDateEl.innerText = new Date().toLocaleString('id-ID');
-  reportTitle.innerText = `LAPORAN TRANSAKSI PEMBELIAN ${type.toUpperCase()}`;
-  
-  // Buat Tabel Laporan yang bersih & terstruktur
-  let rowsHtml = `
-    <table style="width:100%; border-collapse: collapse; margin-top: 15px; color:#ffffff; font-size:11px; text-align:left;">
-      <thead>
-        <tr style="border-bottom: 2px solid #ff2a2a; color: #ff2a2a; font-weight: bold; text-transform: uppercase;">
-          <th style="padding: 8px 6px;">ID Transaksi</th>
-          <th style="padding: 8px 6px;">Nama Pemesan</th>
-          ${type === 'baju' ? '<th style="padding: 8px 6px;">Size</th>' : ''}
-          <th style="padding: 8px 6px;">Qty</th>
-          <th style="padding: 8px 6px;">WhatsApp</th>
-          <th style="padding: 8px 6px;">Total Bayar</th>
-          <th style="padding: 8px 6px;">Tanggal</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
+      printDateEl.innerText = new Date().toLocaleString('id-ID');
+      reportTitle.innerText = `LAPORAN TRANSAKSI PEMBELIAN ${type.toUpperCase()}`;
+      
+      let rowsHtml = `
+        <table style="width:100%; border-collapse: collapse; margin-top: 15px; color:#ffffff; font-size:11px; text-align:left;">
+          <thead>
+            <tr style="border-bottom: 2px solid #ff2a2a; color: #ff2a2a; font-weight: bold; text-transform: uppercase;">
+              <th style="padding: 8px 6px;">ID Transaksi</th>
+              <th style="padding: 8px 6px;">Nama Pemesan</th>
+              ${type === 'baju' ? '<th style="padding: 8px 6px;">Size</th>' : ''}
+              <th style="padding: 8px 6px;">Qty</th>
+              <th style="padding: 8px 6px;">WhatsApp</th>
+              <th style="padding: 8px 6px;">Total Bayar</th>
+              <th style="padding: 8px 6px;">Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
 
-  dataList.forEach(item => {
-    rowsHtml += `
-      <tr style="border-bottom: 1px solid #222222;">
-        <td style="padding: 8px 6px; font-weight: bold; color: #ff2a2a;">${item.orderId}</td>
-        <td style="padding: 8px 6px; font-weight: 600;">${escapeHtml(item.nama)}</td>
-        ${type === 'baju' ? `<td style="padding: 8px 6px;"><span style="background:#222; padding:2px 6px; border-radius:4px;">${item.size || '-'}</span></td>` : ''}
-        <td style="padding: 8px 6px;">${item.pcs} pcs</td>
-        <td style="padding: 8px 6px;">${item.whatsapp}</td>
-        <td style="padding: 8px 6px; font-weight: bold; color: #00ff66;">Rp ${numberWithCommas(item.totalHarga)}</td>
-        <td style="padding: 8px 6px; color: #aaaaaa; font-size: 10px;">${item.dateFormatted}</td>
-      </tr>
-    `;
-  });
+      dataList.forEach(item => {
+        rowsHtml += `
+          <tr style="border-bottom: 1px solid #222222;">
+            <td style="padding: 8px 6px; font-weight: bold; color: #ff2a2a;">${item.orderId}</td>
+            <td style="padding: 8px 6px; font-weight: 600;">${escapeHtml(item.nama)}</td>
+            ${type === 'baju' ? `<td style="padding: 8px 6px;"><span style="background:#222; padding:2px 6px; border-radius:4px;">${item.size || '-'}</span></td>` : ''}
+            <td style="padding: 8px 6px;">${item.pcs} pcs</td>
+            <td style="padding: 8px 6px;">${item.whatsapp}</td>
+            <td style="padding: 8px 6px; font-weight: bold; color: #00ff66;">Rp ${numberWithCommas(item.totalHarga)}</td>
+            <td style="padding: 8px 6px; color: #aaaaaa; font-size: 10px;">${item.dateFormatted}</td>
+          </tr>
+        `;
+      });
 
-  const grandTotal = dataList.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
-  const totalPcs = dataList.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
+      const grandTotal = dataList.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
+      const totalPcs = dataList.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
 
-  rowsHtml += `
-      </tbody>
-    </table>
-    
-    <div style="margin-top: 20px; padding-top: 12px; border-top: 2px solid #ff2a2a; display: flex; justify-content: space-between; align-items: center;">
-      <span style="font-size: 11px; color: #aaa;">Total Item Terjual: <b style="color:#fff;">${totalPcs} pcs</b></span>
-      <span style="font-size: 13px; font-weight: 900;">TOTAL OMSET: <span style="color:#00ff66; margin-left: 8px;">Rp ${numberWithCommas(grandTotal)}</span></span>
-    </div>
-  `;
+      rowsHtml += `
+          </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; padding-top: 12px; border-top: 2px solid #ff2a2a; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 11px; color: #aaa;">Total Item Terjual: <b style="color:#fff;">${totalPcs} pcs</b></span>
+          <span style="font-size: 13px; font-weight: 900;">TOTAL OMSET: <span style="color:#00ff66; margin-left: 8px;">Rp ${numberWithCommas(grandTotal)}</span></span>
+        </div>
+      `;
 
-  reportContent.innerHTML = rowsHtml;
+      reportContent.innerHTML = rowsHtml;
+      reportArea.classList.remove('hidden');
 
-  // Tampilkan sementara elemen pembungkus agar bisa dirayapi html2canvas
-  reportArea.classList.remove('hidden');
+      const opt = {
+        margin:       0.3,
+        filename:     `Laporan_Riwayat_${type.toUpperCase()}_BOD.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, backgroundColor: '#000000', logging: false },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+      };
 
-  const opt = {
-    margin:       0.3,
-    filename:     `Laporan_Riwayat_${type.toUpperCase()}_BOD.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, backgroundColor: '#000000', logging: false },
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
-  };
+      html2pdf().set(opt).from(reportWrapper).save().then(() => {
+        reportArea.classList.add('hidden');
+      }).catch(err => {
+        console.error(err);
+        reportArea.classList.add('hidden');
+        showToast("Gagal mengunduh PDF Laporan", "error");
+      });
+    }
 
-  // Proses download & sembunyikan kembali setelah selesai
-  html2pdf().set(opt).from(reportWrapper).save().then(() => {
-    reportArea.classList.add('hidden');
-  }).catch(err => {
-    console.error(err);
-    reportArea.classList.add('hidden');
-    showToast("Gagal mengunduh PDF Laporan", "error");
-  });
-}
-
-    // TAB SWITCHER
     window.switchTab = function(tab) {
       const sections = {
         baju: document.getElementById('tabBaju'),
@@ -1290,7 +1353,6 @@ window.downloadPdfLaporan = function(type) {
       buttons[tab].className = `py-3 px-3 rounded-xl font-extrabold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 ${activeClass}`;
     }
 
-    // UTILS
     function formatPhoneNumber(phone) {
       let cleaned = phone.replace(/\D/g, '');
       if (cleaned.startsWith('0')) {

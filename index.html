@@ -638,15 +638,22 @@
     </div>
 
     <!-- HIDDEN PRINT AREA FOR REPORT PDF GENERATION -->
-<div id="pdfReportArea" style="position: absolute; left: -9999px; top: 0; width: 700px;" class="p-8 bg-black text-white font-sans mx-auto border border-bodRed">
-  <div class="flex items-center justify-between border-b-2 border-bodRed pb-4 mb-4">
-    <img src="WhatsApp Image 2026-10-17 at 16.14.10.jpeg" alt="Logo" class="h-16 w-auto object-contain">
-    <div class="text-right">
-      <h2 id="pdfReportTitle" class="text-xl font-black text-bodRed uppercase">LAPORAN RIWAYAT TRANSAKSI</h2>
-      <p class="text-xs text-gray-400">BEWARE OF DOGS OFFICIAL DATABASE</p>
+<!-- HIDDEN AREA UNTUK GENERATE PDF LAPORAN -->
+<div id="pdfReportArea" class="hidden">
+  <div id="pdfReportContentWrapper" style="padding: 24px; background-color: #000000; color: #ffffff; font-family: 'Montserrat', sans-serif; width: 800px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; items-center: center; border-bottom: 2px solid #ff2a2a; padding-bottom: 12px; margin-bottom: 16px;">
+      <div>
+        <h2 id="pdfReportTitle" style="font-size: 18px; font-weight: 900; color: #ff2a2a; text-transform: uppercase; margin: 0;">LAPORAN RIWAYAT TRANSAKSI</h2>
+        <p style="font-size: 11px; color: #aaa; margin: 4px 0 0 0;">BEWARE OF DOGS OFFICIAL DATABASE</p>
+      </div>
+      <div style="text-align: right; font-size: 10px; color: #888;">
+        <p style="margin: 0;">Dicetak pada: <span id="pdfPrintDate">-</span></p>
+      </div>
     </div>
+    
+    <!-- Tempat Tabel Laporan Rendition -->
+    <div id="pdfReportContent"></div>
   </div>
-  <div id="pdfReportContent" class="text-xs space-y-2"></div>
 </div>
 
     <!-- DIGITAL RECEIPT POPUP -->
@@ -1171,71 +1178,89 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
     }
 
 window.downloadPdfLaporan = function(type) {
-      const reportTitle = document.getElementById('pdfReportTitle');
-      const reportContent = document.getElementById('pdfReportContent');
-      const reportArea = document.getElementById('pdfReportArea');
+  const reportTitle = document.getElementById('pdfReportTitle');
+  const reportContent = document.getElementById('pdfReportContent');
+  const reportArea = document.getElementById('pdfReportArea');
+  const reportWrapper = document.getElementById('pdfReportContentWrapper');
+  const printDateEl = document.getElementById('pdfPrintDate');
 
-      const dataList = type === 'baju' ? window.bajuOrders : window.tiketOrders;
+  const dataList = type === 'baju' ? window.bajuOrders : window.tiketOrders;
 
-      if (dataList.length === 0) {
-        showToast(`Belum ada data riwayat ${type} untuk didownload!`, 'error');
-        return;
-      }
+  if (!dataList || dataList.length === 0) {
+    showToast(`Belum ada data riwayat ${type} untuk didownload!`, 'error');
+    return;
+  }
 
-      reportTitle.innerText = `LAPORAN TRANSAKSI PEMBELIAN ${type.toUpperCase()}`;
-      
-      let rowsHtml = `
-        <table style="width:100%; border-collapse: collapse; margin-top: 15px; color:#ffffff; font-size:10px;">
-          <thead>
-            <tr style="border-bottom:2px solid #ff2a2a; text-align:left; color:#ff2a2a;">
-              <th style="padding:6px;">ID</th>
-              <th style="padding:6px;">Nama</th>
-              ${type === 'baju' ? '<th style="padding:6px;">Size</th>' : ''}
-              <th style="padding:6px;">Pcs</th>
-              <th style="padding:6px;">WhatsApp</th>
-              <th style="padding:6px;">Total</th>
-              <th style="padding:6px;">Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
+  // Set tanggal cetak & judul
+  printDateEl.innerText = new Date().toLocaleString('id-ID');
+  reportTitle.innerText = `LAPORAN TRANSAKSI PEMBELIAN ${type.toUpperCase()}`;
+  
+  // Buat Tabel Laporan yang bersih & terstruktur
+  let rowsHtml = `
+    <table style="width:100%; border-collapse: collapse; margin-top: 15px; color:#ffffff; font-size:11px; text-align:left;">
+      <thead>
+        <tr style="border-bottom: 2px solid #ff2a2a; color: #ff2a2a; font-weight: bold; text-transform: uppercase;">
+          <th style="padding: 8px 6px;">ID Transaksi</th>
+          <th style="padding: 8px 6px;">Nama Pemesan</th>
+          ${type === 'baju' ? '<th style="padding: 8px 6px;">Size</th>' : ''}
+          <th style="padding: 8px 6px;">Qty</th>
+          <th style="padding: 8px 6px;">WhatsApp</th>
+          <th style="padding: 8px 6px;">Total Bayar</th>
+          <th style="padding: 8px 6px;">Tanggal</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
 
-      dataList.forEach(item => {
-        rowsHtml += `
-          <tr style="border-bottom:1px solid #333;">
-            <td style="padding:6px; font-weight:bold;">${item.orderId}</td>
-            <td style="padding:6px;">${escapeHtml(item.nama)}</td>
-            ${type === 'baju' ? `<td style="padding:6px;">${item.size}</td>` : ''}
-            <td style="padding:6px;">${item.pcs}</td>
-            <td style="padding:6px;">${item.whatsapp}</td>
-            <td style="padding:6px; font-weight:bold; color:#ff2a2a;">Rp ${numberWithCommas(item.totalHarga)}</td>
-            <td style="padding:6px; color:#aaa;">${item.dateFormatted}</td>
-          </tr>
-        `;
-      });
+  dataList.forEach(item => {
+    rowsHtml += `
+      <tr style="border-bottom: 1px solid #222222;">
+        <td style="padding: 8px 6px; font-weight: bold; color: #ff2a2a;">${item.orderId}</td>
+        <td style="padding: 8px 6px; font-weight: 600;">${escapeHtml(item.nama)}</td>
+        ${type === 'baju' ? `<td style="padding: 8px 6px;"><span style="background:#222; padding:2px 6px; border-radius:4px;">${item.size || '-'}</span></td>` : ''}
+        <td style="padding: 8px 6px;">${item.pcs} pcs</td>
+        <td style="padding: 8px 6px;">${item.whatsapp}</td>
+        <td style="padding: 8px 6px; font-weight: bold; color: #00ff66;">Rp ${numberWithCommas(item.totalHarga)}</td>
+        <td style="padding: 8px 6px; color: #aaaaaa; font-size: 10px;">${item.dateFormatted}</td>
+      </tr>
+    `;
+  });
 
-      const grandTotal = dataList.reduce((acc, curr) => acc + (curr.totalHarga || 0), 0);
+  const grandTotal = dataList.reduce((acc, curr) => acc + (parseInt(curr.totalHarga) || 0), 0);
+  const totalPcs = dataList.reduce((acc, curr) => acc + (parseInt(curr.pcs) || 0), 0);
 
-      rowsHtml += `
-          </tbody>
-        </table>
-        <div style="margin-top:20px; text-align:right; border-top: 1px solid #ff2a2a; padding-top:10px;">
-          <p style="font-size: 12px; font-weight: bold;">TOTAL KESELURUHAN: <span style="color:#ff2a2a;">Rp ${numberWithCommas(grandTotal)}</span></p>
-        </div>
-      `;
+  rowsHtml += `
+      </tbody>
+    </table>
+    
+    <div style="margin-top: 20px; padding-top: 12px; border-top: 2px solid #ff2a2a; display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 11px; color: #aaa;">Total Item Terjual: <b style="color:#fff;">${totalPcs} pcs</b></span>
+      <span style="font-size: 13px; font-weight: 900;">TOTAL OMSET: <span style="color:#00ff66; margin-left: 8px;">Rp ${numberWithCommas(grandTotal)}</span></span>
+    </div>
+  `;
 
-      reportContent.innerHTML = rowsHtml;
+  reportContent.innerHTML = rowsHtml;
 
-      const opt = {
-        margin:       0.3,
-        filename:     `Laporan_Riwayat_${type.toUpperCase()}_BOD.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, backgroundColor: '#000000' },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
-      };
+  // Tampilkan sementara elemen pembungkus agar bisa dirayapi html2canvas
+  reportArea.classList.remove('hidden');
 
-      html2pdf().set(opt).from(reportArea).save();
-    }
+  const opt = {
+    margin:       0.3,
+    filename:     `Laporan_Riwayat_${type.toUpperCase()}_BOD.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, backgroundColor: '#000000', logging: false },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+  };
+
+  // Proses download & sembunyikan kembali setelah selesai
+  html2pdf().set(opt).from(reportWrapper).save().then(() => {
+    reportArea.classList.add('hidden');
+  }).catch(err => {
+    console.error(err);
+    reportArea.classList.add('hidden');
+    showToast("Gagal mengunduh PDF Laporan", "error");
+  });
+}
 
     // TAB SWITCHER
     window.switchTab = function(tab) {

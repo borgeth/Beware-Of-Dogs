@@ -1235,7 +1235,7 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
       html2pdf().set(opt).from(element).save();
     }
 
-    window.downloadPdfLaporan = function(type) {
+window.downloadPdfLaporan = function(type) {
       const reportTitle = document.getElementById('pdfReportTitle');
       const reportContent = document.getElementById('pdfReportContent');
       const reportArea = document.getElementById('pdfReportArea');
@@ -1300,27 +1300,35 @@ _Terima kasih telah memesan official merchandise / tiket BEWARE OF DOGS! Simpan 
           </tbody>
         </table>
         
-        <div style="margin-top: 20px; padding-top: 12px; border-top: 2px solid #ff2a2a; display: flex; justify-content: space-between; align-items: center;">
+        <div style="margin-top: 20px; padding-top: 12px; border-top: 2px solid #ff2a2a; display: flex; justify-space-between; align-items: center;">
           <span style="font-size: 11px; color: #aaa;">Total Item Terjual: <b style="color:#fff;">${totalPcs} pcs</b></span>
           <span style="font-size: 13px; font-weight: 900;">TOTAL OMSET: <span style="color:#00ff66; margin-left: 8px;">Rp ${numberWithCommas(grandTotal)}</span></span>
         </div>
       `;
 
       reportContent.innerHTML = rowsHtml;
+      
+      // Tampilkan elemen PDF secara inline (bukan hidden tailwind) agar bisa dirender html2pdf dengan sempurna
       reportArea.classList.remove('hidden');
+      reportArea.style.display = 'block';
+      reportArea.style.position = 'absolute';
+      reportArea.style.left = '-9999px';
+      reportArea.style.top = '0';
 
       const opt = {
         margin:       0.3,
         filename:     `Laporan_Riwayat_${type.toUpperCase()}_BOD.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, backgroundColor: '#000000', logging: false },
+        html2canvas:  { scale: 2, backgroundColor: '#000000', logging: false, useCORS: true },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
       };
 
       html2pdf().set(opt).from(reportWrapper).save().then(() => {
+        reportArea.style.display = 'none';
         reportArea.classList.add('hidden');
       }).catch(err => {
         console.error(err);
+        reportArea.style.display = 'none';
         reportArea.classList.add('hidden');
         showToast("Gagal mengunduh PDF Laporan", "error");
       });

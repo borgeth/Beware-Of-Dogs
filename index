@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beware Of Dogs Organize</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0d0d0d',
+                        darkCard: 'rgba(22, 22, 22, 0.75)',
+                        brandRed: '#ff2e4d',
+                        brandRedHover: '#e60026',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar setup */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff2e4d;
+            border-radius: 4px;
+        }
+        
+        /* Smooth transitions */
+        .transition-all-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 46, 77, 0.15);
+        }
+
+        .glass-header {
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Carousel animation */
+        .slide-container {
+            display: flex;
+            transition: transform 0.4s ease-out;
+        }
+
+        /* Prevent text selection when dragging or long pressing in edit mode */
+        .no-select {
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 font-sans antialiased selection:bg-brandRed selection:text-white min-h-screen flex justify-center items-center">
+
+    <!-- Mobile Frame Container (Enforces 9:16 Aspect Ratio Look on Desktop while responsive on real phones) -->
+    <div class="relative w-full max-w-[430px] h-screen sm:h-[880px] sm:rounded-[40px] overflow-hidden shadow-2xl bg-darkBg flex flex-col sm:border-[8px] sm:border-zinc-800">
+
+        <!-- 1. BACKGROUND VIDEO & OVERLAY -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <!-- 9:16 Mobile Vertical Video Sample -->
+            <video autoplay loop muted playsinline class="w-full h-full object-cover scale-105">
+                <source src="WhatsApp Video 2026-10-19 at 22.57.43.mp4" type="video/mp4">
+                Your browser does not support video background.
+            </video>
+            <!-- 50% Black Overlay + Blur Layer -->
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/90"></div>
+        </div>
+
+        <!-- 2. HEADER BAR -->
+        <header class="relative z-20 flex justify-between items-center px-5 py-4 glass-header border-b border-white/5">
+            <div class="flex items-center space-x-2.5">
+                <!-- Logo Icon next to title -->
+                <div class="relative w-8 h-8 rounded-full overflow-hidden border border-brandRed/50 bg-black flex-shrink-0 shadow-md shadow-brandRed/20">
+                    <img id="headerLogoImg" src="WhatsApp Image 2026-10-17 at 16.14.10.jpg" alt="BOD Logo" class="w-full h-full object-cover" onerror="this.src='WhatsApp Image 2026-10-17 at 16.14.10.jpg'">
+                </div>
+                <span class="font-extrabold tracking-wider text-lg font-oswald text-white uppercase">
+                    BewareOfDogs <span class="text-brandRed">Organize</span>
+                </span>
+            </div>
+
+            <!-- Login / Admin Status Area -->
+            <div id="authContainer" class="flex items-center gap-2">
+                <!-- Injected via JS -->
+            </div>
+        </header>
+
+        <!-- MAIN SCROLLABLE CONTENT AREA -->
+        <main class="relative z-10 flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-6">
+
+            <!-- 3. HEADER FOTO SLIDER / CAROUSEL SECTION -->
+            <section class="relative rounded-2xl overflow-hidden glass-panel shadow-lg group">
+                <div class="relative w-full h-48 sm:h-56 overflow-hidden">
+                    <!-- Slides Wrapper -->
+                    <div id="slidesWrapper" class="slide-container h-full w-full">
+                        <!-- Slides dynamically rendered here -->
+                    </div>
+
+                    <!-- Slide Navigation Controls -->
+                    <button id="prevSlide" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-brandRed text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-80 active:scale-95">
+                        <i class="fas me-0.5 fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="nextSlide" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-brandRed text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-80 active:scale-95">
+                        <i class="fas ms-0.5 fa-chevron-right text-xs"></i>
+                    </button>
+
+                    <!-- Indicators -->
+                    <div id="slideIndicators" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1.5 z-10">
+                        <!-- Dots rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Admin Slider Control Panel (Visible only when logged in) -->
+                <div id="adminSliderTools" class="hidden p-3 bg-zinc-950/90 border-t border-brandRed/30 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-brandRed">
+                            <i class="fas fa-sliders-h me-1"></i> Panel Slide Carousel
+                        </span>
+                        <div class="flex gap-1.5">
+                            <button onclick="toggleEditLogoModal()" class="px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white text-xs rounded-lg font-medium transition-colors border border-zinc-700">
+                                <i class="fas fa-image me-1 text-brandRed"></i> Ganti Logo
+                            </button>
+                            <button onclick="toggleAddSlideModal()" class="px-2.5 py-1 bg-brandRed hover:bg-brandRedHover text-white text-xs rounded-lg font-medium transition-colors">
+                                <i class="fas fa-plus me-1"></i> Tambah Slide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. DYNAMIC TEXT & SECTIONS EDITOR AREA -->
+            <section class="space-y-4">
+                <div class="flex justify-between items-center px-1">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-400">Konten Halaman</h2>
+                    <button id="addSectionBtn" onclick="addNewContentSection()" class="hidden px-3 py-1.5 bg-brandRed/20 hover:bg-brandRed border border-brandRed/40 text-brandRed hover:text-white text-xs rounded-full font-medium transition-all">
+                        <i class="fas fa-plus-circle me-1"></i> Tambah Section
+                    </button>
+                </div>
+
+                <!-- Container Dynamic Sections -->
+                <div id="contentSectionsContainer" class="space-y-4">
+                    <!-- Dynamic sections rendered by JS -->
+                </div>
+            </section>
+
+            <!-- Footer minimalis -->
+            <footer class="pt-6 pb-4 text-center border-t border-white/5">
+                <p class="text-[11px] text-zinc-500 font-medium">
+                    &copy; 2026 BEWARE OF DOGS ORGANIZE.
+                </p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- MODAL: LOGIN ADMIN -->
+    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-xs glass-panel bg-zinc-950 border border-brandRed/40 rounded-2xl p-6 shadow-2xl relative transform scale-95 transition-transform duration-300">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-brandRed/10 border border-brandRed/30 text-brandRed rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white font-oswald uppercase">Admin Access</h3>
+                <p class="text-xs text-zinc-400">Masukan kredensial BOD2026</p>
+            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-zinc-400 mb-1">Username</label>
+                    <input type="text" id="loginUsername" required class="w-full px-3 py-2 bg-zinc-900/90 border border-zinc-700 focus:border-brandRed rounded-lg text-sm text-white focus:outline-none transition-colors" placeholder="BOD2026">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-zinc-400 mb-1">Password</label>
+                    <input type="password" id="loginPassword" required class="w-full px-3 py-2 bg-zinc-900/90 border border-zinc-700 focus:border-brandRed rounded-lg text-sm text-white focus:outline-none transition-colors" placeholder="••••••••">
+                </div>
+                <div id="loginError" class="text-xs text-brandRed hidden text-center font-medium"></div>
+                <button type="submit" class="w-full py-2.5 bg-brandRed hover:bg-brandRedHover text-white font-semibold rounded-lg text-sm shadow-lg shadow-brandRed/20 transition-all">
+                    Masuk Sebagai Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: TAMBAH SLIDE -->
+    <div id="addSlideModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-xs glass-panel bg-zinc-950 border border-brandRed/40 rounded-2xl p-5 shadow-2xl relative">
+            <button onclick="toggleAddSlideModal()" class="absolute top-3 right-3 text-zinc-400 hover:text-white">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <h3 class="text-base font-bold text-white mb-3 font-oswald uppercase">Tambah Slide Baru</h3>
+            <form onsubmit="handleAddSlide(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs text-zinc-400 mb-1">Tipe Slide</label>
+                    <select id="slideTypeInput" class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:border-brandRed focus:outline-none">
+                        <option value="image">Gambar / Foto</option>
+                        <option value="video">Video (Auto Play / YouTube / MP4)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs text-zinc-400 mb-1">URL Media (Foto / Video)</label>
+                    <input type="url" id="slideUrlInput" placeholder="https://..." required class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:border-brandRed focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs text-zinc-400 mb-1">Judul / Caption (Opsional)</label>
+                    <input type="text" id="slideTitleInput" placeholder="Promo Spesial 2026" class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:border-brandRed focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-2 bg-brandRed hover:bg-brandRedHover text-white text-xs font-bold rounded-lg transition-colors">
+                    Simpan Slide
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: GANTI LOGO HEADER -->
+    <div id="editLogoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-xs glass-panel bg-zinc-950 border border-brandRed/40 rounded-2xl p-5 shadow-2xl relative">
+            <button onclick="toggleEditLogoModal()" class="absolute top-3 right-3 text-zinc-400 hover:text-white">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <h3 class="text-base font-bold text-white mb-3 font-oswald uppercase">Ubah Logo Header</h3>
+            <form onsubmit="handleSaveLogo(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs text-zinc-400 mb-1">URL Foto / Icon Logo</label>
+                    <input type="url" id="logoUrlInput" placeholder="https://images.unsplash.com/..." required class="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:border-brandRed focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-2 bg-brandRed hover:bg-brandRedHover text-white text-xs font-bold rounded-lg transition-colors">
+                    Simpan Logo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // Default Data State
+        const DEFAULT_LOGO = 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=200&auto=format&fit=crop';
+        
+        const DEFAULT_SLIDES = [
+            { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop', title: 'BEWARE OF DOGS 2026' },
+            { id: 2, type: 'video', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', title: 'DARK & CLEAN STYLE' },
+            { id: 3, type: 'image', url: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=800&auto=format&fit=crop', title: 'EXCLUSIVE EXPERIENCE' }
+        ];
+
+        const DEFAULT_SECTIONS = [
+            {
+                id: 'sec_1',
+                headerText: 'WELCOME TO THE DARKNESS',
+                bodyText: 'Ini adalah tampilan website mobile premium dengan dominasi warna hitam dan aksen merah menyala. Website ini dikembangkan khusus untuk smartphone dengan fitur background video 9:16 dan blur modern.',
+                headerColor: '#ff2e4d',
+                bodyColor: '#d4d4d8',
+                headerSize: '20', // px
+                bodySize: '13', // px
+                fontFamily: 'oswald',
+                align: 'left',
+                // Media Properties
+                mediaType: 'image', // 'none' | 'image' | 'video'
+                mediaUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop',
+                mediaPosition: 'top', // 'top' | 'bottom'
+                mediaWidth: 'full', // 'full' | 'fit'
+                mediaRadius: 'xl' // 'none' | 'md' | 'xl' | 'full'
+            },
+            {
+                id: 'sec_2',
+                headerText: 'FITUR EDIT KONTEN & MEDIA DINAMIS',
+                bodyText: 'Login menggunakan tombol di pojok kanan atas dengan kredensial BOD2026 untuk mengedit gambar carousel, mengubah isi teks, warna, serta menyisipkan media foto/video pada setiap section.',
+                headerColor: '#ffffff',
+                bodyColor: '#a1a1aa',
+                headerSize: '18',
+                bodySize: '13',
+                fontFamily: 'sans',
+                align: 'left',
+                mediaType: 'video',
+                mediaUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                mediaPosition: 'bottom',
+                mediaWidth: 'full',
+                mediaRadius: 'xl'
+            }
+        ];
+
+        // Global State Variables
+        let isAdminLoggedIn = false;
+        let headerLogo = DEFAULT_LOGO;
+        let slides = [];
+        let contentSections = [];
+        let currentSlideIndex = 0;
+        let slideInterval = null;
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStoredData();
+            checkAuthSession();
+            renderHeaderLogo();
+            renderAuthUI();
+            renderSlides();
+            renderContentSections();
+            startAutoSlide();
+        });
+
+        // Local Storage Helpers
+        function loadStoredData() {
+            const savedLogo = localStorage.getItem('bod_header_logo');
+            headerLogo = savedLogo || DEFAULT_LOGO;
+
+            const savedSlides = localStorage.getItem('bod_slides');
+            slides = savedSlides ? JSON.parse(savedSlides) : DEFAULT_SLIDES;
+
+            const savedSections = localStorage.getItem('bod_sections');
+            contentSections = savedSections ? JSON.parse(savedSections) : DEFAULT_SECTIONS;
+        }
+
+        function renderHeaderLogo() {
+            const logoImg = document.getElementById('headerLogoImg');
+            if (logoImg) {
+                logoImg.src = headerLogo;
+            }
+        }
+
+        function toggleEditLogoModal() {
+            const modal = document.getElementById('editLogoModal');
+            if (modal.classList.contains('hidden')) {
+                document.getElementById('logoUrlInput').value = headerLogo;
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function handleSaveLogo(e) {
+            e.preventDefault();
+            const newLogoUrl = document.getElementById('logoUrlInput').value.trim();
+            if (newLogoUrl) {
+                headerLogo = newLogoUrl;
+                localStorage.setItem('bod_header_logo', headerLogo);
+                renderHeaderLogo();
+                toggleEditLogoModal();
+            }
+        }
+
+        function saveSlidesToStorage() {
+            localStorage.setItem('bod_slides', JSON.stringify(slides));
+        }
+
+        function saveSectionsToStorage() {
+            localStorage.setItem('bod_sections', JSON.stringify(contentSections));
+        }
+
+        // Authentication Handlers
+        function checkAuthSession() {
+            isAdminLoggedIn = localStorage.getItem('bod_admin_logged') === 'true';
+        }
+
+        function renderAuthUI() {
+            const container = document.getElementById('authContainer');
+            if (isAdminLoggedIn) {
+                container.innerHTML = `
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-brandRed/20 text-brandRed border border-brandRed/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandRed"></span> ADMIN ACTIVE
+                    </span>
+                    <button onclick="handleLogout()" class="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors" title="Logout">
+                        <i class="fas fa-sign-out-alt text-sm"></i>
+                    </button>
+                `;
+                document.getElementById('adminSliderTools').classList.remove('hidden');
+                document.getElementById('addSectionBtn').classList.remove('hidden');
+            } else {
+                container.innerHTML = `
+                    <button onclick="openLoginModal()" class="px-3 py-1.5 bg-brandRed/10 hover:bg-brandRed border border-brandRed/30 text-brandRed hover:text-white rounded-full text-xs font-semibold tracking-wide transition-all duration-300 flex items-center gap-1.5">
+                        <i class="fas fa-lock text-[10px]"></i> LOGIN
+                    </button>
+                `;
+                document.getElementById('adminSliderTools').classList.add('hidden');
+                document.getElementById('addSectionBtn').classList.add('hidden');
+            }
+            // Re-render sections to enable/disable editor controls
+            renderContentSections();
+        }
+
+        function openLoginModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('loginModal');
+            modal.querySelector('div').classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('loginError').classList.add('hidden');
+            }, 300);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUsername').value.trim();
+            const pass = document.getElementById('loginPassword').value.trim();
+            const errDiv = document.getElementById('loginError');
+
+            if (user === 'BOD2026' && pass === 'bewareofdogs2026') {
+                isAdminLoggedIn = true;
+                localStorage.setItem('bod_admin_logged', 'true');
+                renderAuthUI();
+                closeLoginModal();
+                document.getElementById('loginForm').reset();
+            } else {
+                errDiv.innerText = 'Username atau Password salah!';
+                errDiv.classList.remove('hidden');
+            }
+        }
+
+        function handleLogout() {
+            isAdminLoggedIn = false;
+            localStorage.setItem('bod_admin_logged', 'false');
+            renderAuthUI();
+        }
+
+        // SLIDER / CAROUSEL LOGIC
+        function renderSlides() {
+            const wrapper = document.getElementById('slidesWrapper');
+            const indicators = document.getElementById('slideIndicators');
+
+            if (slides.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center bg-zinc-900 text-zinc-500 text-xs">
+                        Tidak ada slide gambar.
+                    </div>`;
+                indicators.innerHTML = '';
+                return;
+            }
+
+            wrapper.innerHTML = slides.map((slide, idx) => {
+                const type = slide.type || 'image';
+                let mediaContent = '';
+
+                if (type === 'video') {
+                    const embedUrl = formatVideoEmbedUrl(slide.url);
+                    const isYouTube = embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be');
+
+                    if (isYouTube) {
+                        mediaContent = `
+                            <iframe src="${embedUrl}" class="w-full h-full object-cover pointer-events-none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allow="autoplay"></iframe>
+                        `;
+                    } else {
+                        mediaContent = `
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="${slide.url}" type="video/mp4">
+                            </video>
+                        `;
+                    }
+                } else {
+                    mediaContent = `
+                        <img src="${slide.url}" alt="${slide.title || 'Slide'}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/18181b/ff2e4d?text=Gambar+Error'">
+                    `;
+                }
+
+                return `
+                <div class="min-w-full h-full relative flex-shrink-0 bg-black">
+                    ${mediaContent}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                    ${slide.title ? `<div class="absolute bottom-4 left-4 right-12 text-white font-oswald text-sm tracking-wide font-bold uppercase truncate pointer-events-none">${slide.title}</div>` : ''}
+                    
+                    ${isAdminLoggedIn ? `
+                        <button onclick="deleteSlide(${idx})" class="absolute top-2 right-2 p-1.5 bg-brandRed/80 hover:bg-brandRed text-white rounded-full text-xs shadow-lg transition-transform hover:scale-110 z-20" title="Hapus Slide">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    ` : ''}
+                </div>
+                `;
+            }).join('');
+
+            indicators.innerHTML = slides.map((_, idx) => `
+                <button onclick="goToSlide(${idx})" class="w-2 h-2 rounded-full transition-all ${idx === currentSlideIndex ? 'bg-brandRed w-5' : 'bg-white/40'}"></button>
+            `).join('');
+
+            updateSlidePosition();
+        }
+
+        function updateSlidePosition() {
+            const wrapper = document.getElementById('slidesWrapper');
+            wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+            // Update indicators active styling
+            const dots = document.getElementById('slideIndicators').children;
+            Array.from(dots).forEach((dot, idx) => {
+                if (idx === currentSlideIndex) {
+                    dot.className = 'w-5 h-2 rounded-full bg-brandRed transition-all';
+                } else {
+                    dot.className = 'w-2 h-2 rounded-full bg-white/40 transition-all';
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlidePosition();
+            restartAutoSlide();
+        }
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            updateSlidePosition();
+            restartAutoSlide();
+        });
+
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            updateSlidePosition();
+            restartAutoSlide();
+        });
+
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                if (slides.length > 1) {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                    updateSlidePosition();
+                }
+            }, 5000);
+        }
+
+        function restartAutoSlide() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        function toggleAddSlideModal() {
+            const modal = document.getElementById('addSlideModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                }, 10);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function handleAddSlide(e) {
+            e.preventDefault();
+            const type = document.getElementById('slideTypeInput').value;
+            const url = document.getElementById('slideUrlInput').value.trim();
+            const title = document.getElementById('slideTitleInput').value.trim();
+
+            if (url) {
+                slides.push({ id: Date.now(), type, url, title });
+                saveSlidesToStorage();
+                renderSlides();
+                toggleAddSlideModal();
+                document.getElementById('slideUrlInput').value = '';
+                document.getElementById('slideTitleInput').value = '';
+                goToSlide(slides.length - 1);
+            }
+        }
+
+        function deleteSlide(index) {
+            if (confirm('Hapus slide gambar ini?')) {
+                slides.splice(index, 1);
+                if (currentSlideIndex >= slides.length) {
+                    currentSlideIndex = Math.max(0, slides.length - 1);
+                }
+                saveSlidesToStorage();
+                renderSlides();
+            }
+        }
+
+        // Helper to format YouTube Embed URL
+        function formatVideoEmbedUrl(url) {
+            if (!url) return '';
+            let baseUrl = url;
+            if (url.includes('youtu.be/')) {
+                const id = url.split('youtu.be/')[1]?.split('?')[0];
+                baseUrl = `https://www.youtube.com/embed/${id}`;
+            } else if (url.includes('youtube.com/watch')) {
+                const urlParams = new URLSearchParams(new URL(url).search);
+                const id = urlParams.get('v');
+                baseUrl = `https://www.youtube.com/embed/${id}`;
+            }
+
+            if (baseUrl.includes('youtube.com/embed/')) {
+                // Ensure autoplay and mute parameters are attached for auto playback
+                const hasParams = baseUrl.includes('?');
+                const separator = hasParams ? '&' : '?';
+                if (!baseUrl.includes('autoplay=')) {
+                    baseUrl += `${separator}autoplay=1&mute=1&enablejsapi=1`;
+                }
+            }
+            return baseUrl;
+        }
+
+        // Helper to render media HTML
+        function renderSectionMediaHTML(sec) {
+            if (!sec.mediaType || sec.mediaType === 'none' || !sec.mediaUrl) {
+                return '';
+            }
+
+            const widthClass = sec.mediaWidth === 'fit' ? 'max-w-[80%] mx-auto' : 'w-full';
+            const radiusClass = sec.mediaRadius === 'none' ? 'rounded-none' : 
+                                sec.mediaRadius === 'md' ? 'rounded-md' : 
+                                sec.mediaRadius === 'full' ? 'rounded-3xl' : 'rounded-xl';
+
+            if (sec.mediaType === 'image') {
+                return `
+                    <div class="my-3 overflow-hidden ${widthClass} ${radiusClass} border border-white/10 shadow-lg">
+                        <img src="${sec.mediaUrl}" alt="Section Media" class="w-full h-auto object-cover max-h-64" onerror="this.src='https://placehold.co/600x400/18181b/ff2e4d?text=Gambar+Error'">
+                    </div>
+                `;
+            }
+
+            if (sec.mediaType === 'video') {
+                const embedUrl = formatVideoEmbedUrl(sec.mediaUrl);
+                const isYouTube = embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be');
+
+                return `
+                    <div class="my-3 overflow-hidden ${widthClass} ${radiusClass} border border-white/10 shadow-lg bg-black">
+                        ${isYouTube ? `
+                            <div class="relative w-full pt-[56.25%]">
+                                <iframe src="${embedUrl}" class="absolute inset-0 w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen allow="autoplay"></iframe>
+                            </div>
+                        ` : `
+                            <video autoplay loop muted playsinline controls class="w-full h-auto max-h-64 object-cover">
+                                <source src="${sec.mediaUrl}" type="video/mp4">
+                                Browser Anda tidak mendukung pemutaran video.
+                            </video>
+                        `}
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        // DYNAMIC CONTENT SECTIONS LOGIC & EDITOR
+        function renderContentSections() {
+            const container = document.getElementById('contentSectionsContainer');
+            if (contentSections.length === 0) {
+                container.innerHTML = `<div class="p-4 text-center text-zinc-500 text-xs">Belum ada konten tersimpan.</div>`;
+                return;
+            }
+
+            container.innerHTML = contentSections.map((sec, idx) => {
+                const fontClass = sec.fontFamily === 'oswald' ? 'font-oswald' : 
+                                 sec.fontFamily === 'playfair' ? 'font-playfair' : 
+                                 sec.fontFamily === 'space' ? 'font-space' : 'font-sans';
+
+                const mediaHTML = renderSectionMediaHTML(sec);
+                const mediaPos = sec.mediaPosition || 'top';
+
+                return `
+                <div class="glass-panel rounded-2xl p-4 relative group transition-all">
+                    <!-- DISPLAY MODE -->
+                    <div id="display_${sec.id}" class="space-y-2">
+                        
+                        <!-- Media Position: Top -->
+                        ${mediaPos === 'top' ? mediaHTML : ''}
+
+                        <h3 class="${fontClass} font-bold tracking-tight" 
+                            style="color: ${sec.headerColor}; font-size: ${sec.headerSize}px; text-align: ${sec.align}">
+                            ${sec.headerText}
+                        </h3>
+                        <p class="${fontClass} leading-relaxed" 
+                           style="color: ${sec.bodyColor}; font-size: ${sec.bodySize}px; text-align: ${sec.align}">
+                            ${sec.bodyText}
+                        </p>
+
+                        <!-- Media Position: Bottom -->
+                        ${mediaPos === 'bottom' ? mediaHTML : ''}
+                        
+                        ${isAdminLoggedIn ? `
+                            <div class="pt-3 border-t border-white/5 flex justify-end gap-2">
+                                <button onclick="toggleEditSection('${sec.id}')" class="px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white rounded text-xs">
+                                    <i class="fas fa-edit me-1 text-brandRed"></i> Edit Konten & Media
+                                </button>
+                                <button onclick="deleteContentSection('${sec.id}')" class="px-2.5 py-1 bg-red-950/40 hover:bg-red-900/60 text-red-400 rounded text-xs border border-red-800/30">
+                                    <i class="fas fa-trash me-1"></i> Hapus
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- EDIT MODE (Visible only when toggled by Admin) -->
+                    ${isAdminLoggedIn ? `
+                    <div id="editor_${sec.id}" class="hidden space-y-3 bg-zinc-950/90 p-3 rounded-xl border border-brandRed/30 text-xs">
+                        <div class="flex justify-between items-center text-brandRed font-bold pb-1 border-b border-zinc-800">
+                            <span><i class="fas fa-sliders-h me-1"></i> Editor Section & Media</span>
+                            <button onclick="toggleEditSection('${sec.id}')" class="text-zinc-400 hover:text-white">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="block text-zinc-400 mb-1">Header Teks:</label>
+                            <input type="text" id="input_header_${sec.id}" value="${sec.headerText}" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1.5 text-white focus:border-brandRed focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-zinc-400 mb-1">Isi Teks / Paragraf:</label>
+                            <textarea id="input_body_${sec.id}" rows="3" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1.5 text-white focus:border-brandRed focus:outline-none">${sec.bodyText}</textarea>
+                        </div>
+
+                        <!-- Media Settings Block -->
+                        <div class="p-2.5 bg-zinc-900/80 rounded-lg border border-zinc-800 space-y-2">
+                            <span class="block text-brandRed font-semibold text-[11px]"><i class="fas fa-photo-video me-1"></i> Pengaturan Media (Foto / Video)</span>
+                            
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-zinc-400 text-[10px]">Tipe Media:</label>
+                                    <select id="input_mtype_${sec.id}" class="w-full bg-zinc-950 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                        <option value="none" ${sec.mediaType === 'none' ? 'selected' : ''}>Tanpa Media</option>
+                                        <option value="image" ${sec.mediaType === 'image' ? 'selected' : ''}>Foto / Gambar</option>
+                                        <option value="video" ${sec.mediaType === 'video' ? 'selected' : ''}>Video (MP4 / YouTube)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-zinc-400 text-[10px]">Posisi Media:</label>
+                                    <select id="input_mpos_${sec.id}" class="w-full bg-zinc-950 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                        <option value="top" ${sec.mediaPosition === 'top' ? 'selected' : ''}>Di Atas Teks</option>
+                                        <option value="bottom" ${sec.mediaPosition === 'bottom' ? 'selected' : ''}>Di Bawah Teks</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">URL Media (Gambar / YouTube / MP4):</label>
+                                <input type="url" id="input_murl_${sec.id}" value="${sec.mediaUrl || ''}" placeholder="https://..." class="w-full bg-zinc-950 border border-zinc-700 rounded px-2 py-1 text-white text-[11px] focus:border-brandRed focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-zinc-400 text-[10px]">Lebar Media:</label>
+                                    <select id="input_mwidth_${sec.id}" class="w-full bg-zinc-950 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                        <option value="full" ${sec.mediaWidth === 'full' ? 'selected' : ''}>Penuh (100%)</option>
+                                        <option value="fit" ${sec.mediaWidth === 'fit' ? 'selected' : ''}>Tengah (80%)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-zinc-400 text-[10px]">Sudut / Radius:</label>
+                                    <select id="input_mradius_${sec.id}" class="w-full bg-zinc-950 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                        <option value="none" ${sec.mediaRadius === 'none' ? 'selected' : ''}>Siku (0px)</option>
+                                        <option value="md" ${sec.mediaRadius === 'md' ? 'selected' : ''}>Sedang (6px)</option>
+                                        <option value="xl" ${sec.mediaRadius === 'xl' ? 'selected' : ''}>Melengkung (12px)</option>
+                                        <option value="full" ${sec.mediaRadius === 'full' ? 'selected' : ''}>Bulat Kapsul</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stylings Grid -->
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Warna Header:</label>
+                                <input type="color" id="input_hcolor_${sec.id}" value="${sec.headerColor}" class="w-full h-8 bg-transparent cursor-pointer rounded">
+                            </div>
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Warna Isi:</label>
+                                <input type="color" id="input_bcolor_${sec.id}" value="${sec.bodyColor}" class="w-full h-8 bg-transparent cursor-pointer rounded">
+                            </div>
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Ukuran Header (px):</label>
+                                <input type="number" id="input_hsize_${sec.id}" value="${sec.headerSize}" min="12" max="40" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Ukuran Isi (px):</label>
+                                <input type="number" id="input_bsize_${sec.id}" value="${sec.bodySize}" min="10" max="24" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Font Family:</label>
+                                <select id="input_font_${sec.id}" class="w-full bg-zinc-900 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                    <option value="sans" ${sec.fontFamily === 'sans' ? 'selected' : ''}>Inter (Sans)</option>
+                                    <option value="oswald" ${sec.fontFamily === 'oswald' ? 'selected' : ''}>Oswald (Bold)</option>
+                                    <option value="playfair" ${sec.fontFamily === 'playfair' ? 'selected' : ''}>Playfair (Serif)</option>
+                                    <option value="space" ${sec.fontFamily === 'space' ? 'selected' : ''}>Space Grotesk</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-zinc-400 text-[10px]">Alignment:</label>
+                                <select id="input_align_${sec.id}" class="w-full bg-zinc-900 border border-zinc-700 rounded px-1 py-1 text-white text-[11px]">
+                                    <option value="left" ${sec.align === 'left' ? 'selected' : ''}>Kiri</option>
+                                    <option value="center" ${sec.align === 'center' ? 'selected' : ''}>Tengah</option>
+                                    <option value="right" ${sec.align === 'right' ? 'selected' : ''}>Kanan</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="saveSectionChanges('${sec.id}')" class="w-full py-1.5 bg-brandRed hover:bg-brandRedHover text-white font-bold rounded mt-2">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                    ` : ''}
+                </div>
+                `;
+            }).join('');
+        }
+
+        function toggleEditSection(id) {
+            const displayDiv = document.getElementById(`display_${id}`);
+            const editorDiv = document.getElementById(`editor_${id}`);
+
+            if (editorDiv.classList.contains('hidden')) {
+                editorDiv.classList.remove('hidden');
+                displayDiv.classList.add('hidden');
+            } else {
+                editorDiv.classList.add('hidden');
+                displayDiv.classList.remove('hidden');
+            }
+        }
+
+        function saveSectionChanges(id) {
+            const section = contentSections.find(s => s.id === id);
+            if (!section) return;
+
+            section.headerText = document.getElementById(`input_header_${id}`).value;
+            section.bodyText = document.getElementById(`input_body_${id}`).value;
+            section.headerColor = document.getElementById(`input_hcolor_${id}`).value;
+            section.bodyColor = document.getElementById(`input_bcolor_${id}`).value;
+            section.headerSize = document.getElementById(`input_hsize_${id}`).value;
+            section.bodySize = document.getElementById(`input_bsize_${id}`).value;
+            section.fontFamily = document.getElementById(`input_font_${id}`).value;
+            section.align = document.getElementById(`input_align_${id}`).value;
+
+            // Media save
+            section.mediaType = document.getElementById(`input_mtype_${id}`).value;
+            section.mediaPosition = document.getElementById(`input_mpos_${id}`).value;
+            section.mediaUrl = document.getElementById(`input_murl_${id}`).value.trim();
+            section.mediaWidth = document.getElementById(`input_mwidth_${id}`).value;
+            section.mediaRadius = document.getElementById(`input_mradius_${id}`).value;
+
+            saveSectionsToStorage();
+            renderContentSections();
+        }
+
+        function addNewContentSection() {
+            const newSec = {
+                id: 'sec_' + Date.now(),
+                headerText: 'JUDUL SECTION BARU',
+                bodyText: 'Tuliskan deskripsi atau isi paragraf baru di sini.',
+                headerColor: '#ff2e4d',
+                bodyColor: '#e4e4e7',
+                headerSize: '18',
+                bodySize: '13',
+                fontFamily: 'sans',
+                align: 'left',
+                mediaType: 'none',
+                mediaUrl: '',
+                mediaPosition: 'top',
+                mediaWidth: 'full',
+                mediaRadius: 'xl'
+            };
+
+            contentSections.push(newSec);
+            saveSectionsToStorage();
+            renderContentSections();
+            // Directly toggle editor mode for the new section
+            setTimeout(() => toggleEditSection(newSec.id), 50);
+        }
+
+        function deleteContentSection(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus section ini?')) {
+                contentSections = contentSections.filter(s => s.id !== id);
+                saveSectionsToStorage();
+                renderContentSections();
+            }
+        }
+    </script>
+</body>
+</html>
